@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+allprojects {
+
+    group = 'co.edu.uco'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '17'
+
+    tasks.register("preparekotlinbuildscriptmodel"){}
+
+    apply plugin: "java"
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
