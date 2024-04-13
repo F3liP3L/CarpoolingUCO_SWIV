@@ -1,4 +1,4 @@
-package uco.edu.co;
+package co.edu.uco;
 
 public class Main {
     public static void main(String[] args) {
