@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+allprojects {
+    group = 'co.edu.uco'
+    version = '0.0.1-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+subprojects {
+
+    sourceCompatibility = '17'
+
+    apply plugin: 'java'
+
+    dependencies {
+        implementation 'com.github.F3liP3L:CrossCutting:develop-SNAPSHOT'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+    tasks.register("preparekotlinbuildscriptmodel"){}
+}
+
