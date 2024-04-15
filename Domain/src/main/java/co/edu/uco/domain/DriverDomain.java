@@ -25,7 +25,7 @@ public class DriverDomain {
 
     public DriverDomain() {
         super();
-        setId(UtilUUID.DEFAULT_UUID);
+        setId(UtilUUID.getUtilUUID().DEFAULT_UUID);
         setLicenseNumber(EMPTY);
         setAuthorizedCategory(AuthorizedCategoryDomain.createNewAuthorizedCategory());
         setCustomer(CustomerDomain.build());
@@ -57,7 +57,7 @@ public class DriverDomain {
     }
 
     public void setId(UUID id) {
-        this.id = UtilUUID.getDefaultUUID(id);
+        this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
     }
 
     public CustomerDomain getCustomer() {

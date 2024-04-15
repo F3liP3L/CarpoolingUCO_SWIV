@@ -3,17 +3,13 @@ package co.edu.uco.domain;
 import co.edu.uco.crosscutting.util.UtilNumeric;
 import co.edu.uco.crosscutting.util.UtilObject;
 import co.edu.uco.crosscutting.util.UtilUUID;
-import lombok.Getter;
 
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
 import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
-import static co.edu.uco.crosscutting.util.UtilUUID.getNewUUID;
 
-@Getter
 public class VehicleDomain {
     private UUID id;
     private String plate;
@@ -29,7 +25,7 @@ public class VehicleDomain {
 
     public VehicleDomain() {
         super();
-        setId(UtilUUID.getNewUUID());
+        setId(UtilUUID.getUtilUUID().getNewUUID());
         setPlate(EMPTY);
         setCapacity(ZERO);
         setOwner(DriverDomain.createNewDriver());
@@ -45,7 +41,7 @@ public class VehicleDomain {
     }
 
     public void setId(UUID id) {
-        this.id = id == null ? getNewUUID() : getDefaultUUID(id);
+        this.id = id == null ? UtilUUID.getUtilUUID().getNewUUID() : UtilUUID.getUtilUUID().getDefaultUUID(id);
     }
 
     public void setPlate(String plate) {

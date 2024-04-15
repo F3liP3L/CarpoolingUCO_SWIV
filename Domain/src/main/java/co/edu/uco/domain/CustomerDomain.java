@@ -67,4 +67,8 @@ public class CustomerDomain {
     public void setDocumentIdentity(String documentIdentity) {
         this.documentIdentity = getUtilText().getDefault(documentIdentity);
     }
+
+    public static CustomerDomain build() {
+        return new CustomerDomain();
+    }
 }

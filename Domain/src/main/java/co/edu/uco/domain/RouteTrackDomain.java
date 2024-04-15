@@ -1,6 +1,5 @@
 package co.edu.uco.domain;
 
-import co.edu.uco.carpooling.dto.RouteDTO;
 import co.edu.uco.crosscutting.util.UtilNumeric;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
@@ -13,13 +12,13 @@ import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
 
 public class RouteTrackDomain {
     private UUID id;
-    private RouteDTO route;
+    private RouteDomain route;
     private LocalDateTime routeTrackTime;
     private int latitude;
     private int longitude;
     private LocalDateTime routeCreationTime;
 
-    public RouteTrackDomain(UUID id, RouteDTO route, LocalDateTime routeTrackTime, int latitude, int longitude, LocalDateTime routeCreationTime) {
+    public RouteTrackDomain(UUID id, RouteDomain route, LocalDateTime routeTrackTime, int latitude, int longitude, LocalDateTime routeCreationTime) {
         setId(id);
         setRoute(route);
         setRouteTrackTime(routeTrackTime);
@@ -36,11 +35,11 @@ public class RouteTrackDomain {
         this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
     }
 
-    public RouteDTO getRoute() {
+    public RouteDomain getRoute() {
         return route;
     }
 
-    public void setRoute(RouteDTO route) {
+    public void setRoute(RouteDomain route) {
         this.route = route;
     }
 
