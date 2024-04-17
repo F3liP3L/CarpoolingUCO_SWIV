@@ -1,10 +1,9 @@
 package co.edu.uco.application.dto;
 
-import co.edu.uco.crosscutting.util.UtilUUID;
-
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
+import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 
 public class PointOfInterestDTO {
     private UUID id;
@@ -23,7 +22,7 @@ public class PointOfInterestDTO {
     }
 
     public void setId(UUID id) {
-        this.id = UtilUUID.getDefaultUUID(id);
+        this.id = getUtilUUID().getDefaultUUID(id);
     }
 
     public String getName() {return name;}

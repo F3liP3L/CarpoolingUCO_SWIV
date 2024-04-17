@@ -6,6 +6,10 @@ import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
+import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
+import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
+import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+
 public class DriverDTO {
     private UUID id;
     private String licenseNumber;
@@ -21,7 +25,7 @@ public class DriverDTO {
     }
 
     public void setId(UUID id) {
-        this.id = UtilUUID.getDefaultUUID(id);
+        this.id = getUtilUUID().getDefaultUUID(id);
     }
 
     public DriverDTO(UUID id, String licenseNumber, AuthorizedCategoryDTO authorizedCategory, CustomerDTO customer) {
@@ -34,8 +38,8 @@ public class DriverDTO {
 
     public DriverDTO() {
         super();
-        setId(UtilUUID.getDefaultUUID(id));
-        setLicenseNumber(UtilText.EMPTY);
+        setId(getUtilUUID().getDefaultUUID(id));
+        setLicenseNumber(EMPTY);
         setAuthorizedCategory(AuthorizedCategoryDTO.createNewAuthorizedCategory());
         setCustomer(CustomerDTO.create());
     }
@@ -49,7 +53,7 @@ public class DriverDTO {
     }
 
     public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = UtilText.getUtilText().trim(licenseNumber);
+        this.licenseNumber = getUtilText().trim(licenseNumber);
     }
 
     public AuthorizedCategoryDTO getAuthorizedCategory() {
