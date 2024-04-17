@@ -18,10 +18,10 @@ public class DriverEntity {
     private String licenseNumber;
     @ManyToOne
     @JoinColumn(name = "authorized_category")
-    private AuthorizedCategoryEntity authorizedCategory;
+    private AuthorizedCategoryData authorizedCategory;
     @OneToOne
     @JoinColumn(name = "customer_id")
-    private CustomerEntity customer;
+    private CustomerData customer;
 
 
 }

@@ -1,7 +1,7 @@
 package co.edu.uco.infrastructure.adapter.persistence.repository;
 
-import co.edu.uco.domain.CustomerDomain;
-import co.edu.uco.repository.CustomerRepository;
+import co.edu.uco.entity.CustomerEntity;
+import co.edu.uco.port.output.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,18 +23,18 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepository {
     }
 
     @Override
-    public Optional<CustomerDomain> findById(UUID id) {
+    public Optional<CustomerEntity> findById(UUID id) {
         repository.findById(id);
         return Optional.empty();
     }
 
     @Override
-    public List<CustomerDomain> findAll() {
+    public List<CustomerEntity> findAll() {
         return null;
     }
 
     @Override
-    public Optional<CustomerDomain> findByCompanyEmail(String email) {
+    public Optional<CustomerEntity> findByCompanyEmail(String email) {
         return Optional.empty();
     }
 
@@ -44,17 +44,17 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepository {
     }
 
     @Override
-    public CustomerDomain save(CustomerDomain entity) {
+    public CustomerEntity save(CustomerEntity entity) {
         return null;
     }
 
     @Override
-    public Optional<CustomerDomain> findDni(String dni) {
+    public Optional<CustomerEntity> findDni(String dni) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<CustomerDomain> findPhone(int phone) {
+    public Optional<CustomerEntity> findPhone(int phone) {
         return Optional.empty();
     }
 }
