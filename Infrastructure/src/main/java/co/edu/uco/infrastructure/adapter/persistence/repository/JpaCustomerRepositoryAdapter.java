@@ -1,5 +1,6 @@
 package co.edu.uco.infrastructure.adapter.persistence.repository;
 
+import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
 import co.edu.uco.entity.CustomerEntity;
 import co.edu.uco.port.output.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
@@ -18,14 +19,16 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepository {
 
     private final JpaCustomerRepository repository;
 
-    public JpaCustomerRepositoryAdapter(JpaCustomerRepository repository) {
+    private final EntityAssembler entityAssembler;
+
+    public JpaCustomerRepositoryAdapter(JpaCustomerRepository repository, EntityAssembler entityAssembler) {
         this.repository = repository;
+        this.entityAssembler = entityAssembler;
     }
 
     @Override
     public Optional<CustomerEntity> findById(UUID id) {
-        repository.findById(id);
-        return Optional.empty();
+        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findById(id).get(), CustomerEntity.class));
     }
 
     @Override

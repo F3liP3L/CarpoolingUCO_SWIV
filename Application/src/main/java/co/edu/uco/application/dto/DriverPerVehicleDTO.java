@@ -1,7 +1,5 @@
 package co.edu.uco.application.dto;
 
-import co.edu.uco.crosscutting.util.UtilObject;
-
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
