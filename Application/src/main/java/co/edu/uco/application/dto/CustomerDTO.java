@@ -1,11 +1,10 @@
 package co.edu.uco.application.dto;
 
-import co.edu.uco.crosscutting.util.UtilNumeric;
-import co.edu.uco.crosscutting.util.UtilText;
-
 import java.util.UUID;
 
+import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
 import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
+import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
 import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
 import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 
@@ -18,11 +17,11 @@ public class CustomerDTO {
     private String secondSurname;
     private String password;
     private String companyEmail;
-    private int phone;
+    private String phone;
     private int rol;
 
     public CustomerDTO(UUID id, String dni, String firstName, String secondName, String firstSurname,
-                       String secondSurname, String password, String companyEmail, int phone, int rol) {
+                       String secondSurname, String password, String companyEmail, String phone, int rol) {
         setId(id);
         setDni(dni);
         setFirstName(firstName);
@@ -37,15 +36,15 @@ public class CustomerDTO {
 
     public CustomerDTO() {
         setId(getUtilUUID().getDefaultUUID(id));
-        setDni(UtilText.EMPTY);
-        setFirstName(UtilText.EMPTY);
-        setSecondName(UtilText.EMPTY);
-        setFirstSurname(UtilText.EMPTY);
-        setSecondSurname(UtilText.EMPTY);
-        setPassword(UtilText.EMPTY);
-        setCompanyEmail(UtilText.EMPTY);
-        setPhone(UtilNumeric.ZERO);
-        setRol(UtilNumeric.ZERO);
+        setDni(EMPTY);
+        setFirstName(EMPTY);
+        setSecondName(EMPTY);
+        setFirstSurname(EMPTY);
+        setSecondSurname(EMPTY);
+        setPassword(EMPTY);
+        setCompanyEmail(EMPTY);
+        setPhone(EMPTY);
+        setRol(ZERO);
     }
 
     private CustomerDTO(String password, String companyEmail, int rol) {
@@ -81,8 +80,8 @@ public class CustomerDTO {
         this.secondSurname = getUtilText().trim(secondSurname);
     }
 
-    public void setPhone(int phone) {
-        this.phone = (int) getUtilNumeric().getDefault(phone);
+    public void setPhone(String phone) {
+        this.phone = getUtilText().trim(phone);
     }
 
     public void setCompanyEmail(String companyEmail) {
@@ -121,7 +120,7 @@ public class CustomerDTO {
         return secondSurname;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 

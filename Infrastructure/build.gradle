@@ -16,6 +16,10 @@ dependencies {
 
     implementation "com.azure.spring:spring-cloud-azure-starter-keyvault-secrets:5.10.0"
 
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
+
+    implementation group: 'com.google.maps', name: 'google-maps-services', version: '2.2.0'
+
     implementation project(':Application')
     implementation project(':Domain')
 }

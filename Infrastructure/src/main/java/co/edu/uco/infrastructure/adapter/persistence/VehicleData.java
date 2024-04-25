@@ -16,7 +16,7 @@ public class VehicleData {
     private UUID id;
     @ManyToOne
     @JoinColumn(name = "driver_id")
-    private DriverEntity owner;
+    private DriverData owner;
     @Column(name = "plate")
     private String plate;
     @Column(name = "quota")

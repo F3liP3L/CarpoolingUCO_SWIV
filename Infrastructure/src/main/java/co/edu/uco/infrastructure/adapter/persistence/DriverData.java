@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "driver")
-public class DriverEntity {
+public class DriverData {
     @Id
     private UUID id;
     @Column(name = "license")

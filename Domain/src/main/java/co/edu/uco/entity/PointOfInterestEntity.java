@@ -1,6 +1,5 @@
 package co.edu.uco.entity;
 
-import co.edu.uco.crosscutting.util.UtilObject;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;

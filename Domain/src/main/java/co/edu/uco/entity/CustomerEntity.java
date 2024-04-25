@@ -1,5 +1,6 @@
 package co.edu.uco.entity;
 
+import co.edu.uco.crosscutting.util.UtilText;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
@@ -13,6 +14,7 @@ public class CustomerEntity {
     private String password;
     private String mailEntity;
     private String documentIdentity;
+    private String phone;
 
     public CustomerEntity(UUID id, String name, String password, String mailEntity, String documentIdentity) {
         setId(id);
@@ -28,6 +30,7 @@ public class CustomerEntity {
         setPassword(EMPTY);
         setMailEntity(EMPTY);
         setDocumentIdentity(EMPTY);
+        setPhone(EMPTY);
     }
 
     public UUID getId() { return id; }
@@ -66,6 +69,14 @@ public class CustomerEntity {
 
     public void setDocumentIdentity(String documentIdentity) {
         this.documentIdentity = getUtilText().getDefault(documentIdentity);
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = getUtilText().trim(phone);
     }
 
     public static CustomerEntity build() {
