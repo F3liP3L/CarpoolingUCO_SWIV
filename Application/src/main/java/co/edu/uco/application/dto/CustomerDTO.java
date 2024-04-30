@@ -18,11 +18,11 @@ public class CustomerDTO {
     private String secondSurname;
     private String password;
     private String companyEmail;
-    private int phone;
+    private String phone;
     private int rol;
 
     public CustomerDTO(UUID id, String dni, String firstName, String secondName, String firstSurname,
-                       String secondSurname, String password, String companyEmail, int phone, int rol) {
+                       String secondSurname, String password, String companyEmail, String phone, int rol) {
         setId(id);
         setDni(dni);
         setFirstName(firstName);
@@ -44,7 +44,7 @@ public class CustomerDTO {
         setSecondSurname(UtilText.EMPTY);
         setPassword(UtilText.EMPTY);
         setCompanyEmail(UtilText.EMPTY);
-        setPhone(UtilNumeric.ZERO);
+        setPhone(UtilText.EMPTY);
         setRol(UtilNumeric.ZERO);
     }
 
@@ -81,8 +81,8 @@ public class CustomerDTO {
         this.secondSurname = getUtilText().trim(secondSurname);
     }
 
-    public void setPhone(int phone) {
-        this.phone = (int) getUtilNumeric().getDefault(phone);
+    public void setPhone(String phone) {
+        this.phone = getUtilText().trim(phone);
     }
 
     public void setCompanyEmail(String companyEmail) {
@@ -121,7 +121,7 @@ public class CustomerDTO {
         return secondSurname;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 

@@ -31,7 +31,7 @@ public class CustomerData {
     @Column(name = "email")
     private String companyEmail;
     @Column(name = "phone")
-    private int phone;
+    private String phone;
     @Column(name = "rol")
     private int rol;
 }

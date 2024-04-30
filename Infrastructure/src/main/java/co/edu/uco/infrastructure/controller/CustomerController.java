@@ -1,5 +1,6 @@
 package co.edu.uco.infrastructure.controller;
 
+import co.edu.uco.crosscutting.util.UtilUUID;
 import co.edu.uco.entity.CustomerEntity;
 import co.edu.uco.port.output.repository.CustomerRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +24,6 @@ public class CustomerController {
 
     @GetMapping()
     public CustomerEntity getCustomer() {
-        return customerRepository.findById(null).get();
+        return customerRepository.findById(UtilUUID.getUtilUUID().getStringToUUID("6fc6dafd-fb81-4f8f-a9e9-9b0ac8b0a6da")).get();
     }
-
-
-
 }

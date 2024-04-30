@@ -38,7 +38,7 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepository {
 
     @Override
     public Optional<CustomerEntity> findByCompanyEmail(String email) {
-        return Optional.empty();
+        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findCustomerDataByCompanyEmail(email).get(), CustomerEntity.class));
     }
 
     @Override
