@@ -9,6 +9,8 @@ import co.edu.uco.infrastructure.adapter.jwt.model.UserInformationDetailsService
 import co.edu.uco.port.output.repository.CustomerRepository;
 import co.edu.uco.port.output.repository.DriverRepository;
 import co.edu.uco.util.exception.CarpoolingCustomException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtAuthenticateAdapter  implements PortAuthentication {
 
+    private static final Logger log = LoggerFactory.getLogger(JwtAuthenticateAdapter.class);
     @Autowired
     private UserInformationDetailsService userInformationDetailsService;
     @Autowired
@@ -32,9 +35,11 @@ public class JwtAuthenticateAdapter  implements PortAuthentication {
     private JwtTokenService tokenService;
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Override
     public JwtResponse signIn(JwtRequest request) {
         try {
+            //log.info(passwordEncoder.encode(request.getPassword()));
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getCompanyEmail(), request.getPassword()));
         } catch (BadCredentialsException exception) {
             throw CarpoolingCustomException.buildUserException("The credentials entered are incorrect.");

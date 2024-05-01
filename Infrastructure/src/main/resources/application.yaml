@@ -23,3 +23,5 @@ google:
   maps:
     api:
       key: ${api-key-google-maps}
+signature:
+  secret: ${secret-signature}
