@@ -1,5 +1,9 @@
 package co.edu.uco.infrastructure.controller;
 
+import co.edu.uco.crosscutting.util.UtilUUID;
+import co.edu.uco.entity.CustomerEntity;
+import co.edu.uco.port.output.repository.CustomerRepository;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/carpooling-uco/customer")
 public class CustomerController {
 
+    private final CustomerRepository customerRepository;
 
+    public CustomerController(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
+    @GetMapping()
+    public CustomerEntity getCustomer() {
+        return customerRepository.findById(UtilUUID.getUtilUUID().getStringToUUID("6fc6dafd-fb81-4f8f-a9e9-9b0ac8b0a6da")).get();
+    }
 }
