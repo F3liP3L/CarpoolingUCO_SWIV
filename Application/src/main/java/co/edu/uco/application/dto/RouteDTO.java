@@ -23,7 +23,10 @@ public class RouteDTO {
     private List<PositionDTO> positions;
     private LocalDateTime routeTime;
     private String status;
-    public RouteDTO(UUID id, DriverPerVehicleDTO driverVehicle, int routeCapacity, List<String> pointOfInterest, List<PositionDTO> positions, LocalDateTime routeTime, String status) {
+
+    public RouteDTO(UUID id, DriverPerVehicleDTO driverVehicle, int routeCapacity,
+                    List<String> pointOfInterest, List<PositionDTO> positions, LocalDateTime routeTime,
+                    String status) {
         setId(id);
         setDriverVehicle(driverVehicle);
         setRouteCapacity(routeCapacity);
@@ -35,7 +38,7 @@ public class RouteDTO {
 
     public RouteDTO() {
         setId(getUtilUUID().getDefaultUUID(getUtilUUID().getDefaultUUID(id)));
-        setDriverVehicle(DriverPerVehicleDTO.create());
+        setDriverVehicle(DriverPerVehicleDTO.build());
         setRouteCapacity(ZERO);
         setPointOfInterest(List.of(UtilText.EMPTY));
         setRouteTime(TIME);
@@ -56,7 +59,7 @@ public class RouteDTO {
     }
 
     public void setDriverVehicle(DriverPerVehicleDTO driverVehicle) {
-        this.driverVehicle = getUtilObject().getDefaultIsNull(driverVehicle, DriverPerVehicleDTO.create());
+        this.driverVehicle = getUtilObject().getDefaultIsNull(driverVehicle, DriverPerVehicleDTO.build());
     }
 
     public int getRouteCapacity() {
@@ -92,5 +95,9 @@ public class RouteDTO {
     }
     public void setStatus(String status) {
         this.status = getUtilText().trim(status);
+    }
+
+    public static RouteDTO build() {
+        return new RouteDTO();
     }
 }

@@ -1,16 +1,17 @@
 package co.edu.uco.infrastructure.controller;
 
+import co.edu.uco.application.dto.RouteDTO;
 import co.edu.uco.application.dto.requestroute.RouteRequestDTO;
+import co.edu.uco.application.facade.route.RequestRouteUseCaseFacade;
 import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.infrastructure.controller.response.Response;
 import co.edu.uco.infrastructure.controller.response.dto.Message;
+import co.edu.uco.port.input.bussiness.route.FindRouteUseCase;
 import co.edu.uco.util.exception.CarpoolingCustomException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -21,14 +22,23 @@ import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 @RestController
 public class RouteController {
 
+    private final FindRouteUseCase findRouteUseCase;
+
+    @Autowired
+    private RequestRouteUseCaseFacade requestRouteFacade;
+
+    public RouteController(FindRouteUseCase findRouteUseCase) {
+        this.findRouteUseCase = findRouteUseCase;
+    }
+
     @PostMapping()
-    public ResponseEntity<Response<RouteRequestDTO>> create(@RequestBody RouteRequestDTO route){
-        Response<RouteRequestDTO> response = new Response<>();
-        ResponseEntity<Response<RouteRequestDTO>> responseEntity;
+        public ResponseEntity<Response<RouteDTO>> create(@RequestBody RouteRequestDTO route){
+        Response<RouteDTO> response = new Response<>();
+        ResponseEntity<Response<RouteDTO>> responseEntity;
         HttpStatus httpStatus = HttpStatus.CREATED;
         response.setData(new ArrayList<>());
         try {
-            response.addData(route);
+            response.addData(requestRouteFacade.execute(route));
             response.addMessage(Message.createSuccessMessage("The route has been successfully create.", "successful route create"));
         } catch (CarpoolingCustomException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
@@ -38,11 +48,12 @@ public class RouteController {
                 response.addMessage(Message.createErrorMessage(exception.getTechnicalMessage(), "Technical Message"));
             }
         } catch (GeneralException exception) {
-            httpStatus = HttpStatus.BAD_REQUEST;
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected errors"));
         }
         responseEntity = new ResponseEntity<>(response, httpStatus);
         return responseEntity;
     }
+
 }
 
