@@ -2,6 +2,7 @@ package co.edu.uco.infrastructure.adapter.persistence.repository;
 
 import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
 import co.edu.uco.entity.CustomerEntity;
+import co.edu.uco.infrastructure.adapter.persistence.CustomerData;
 import co.edu.uco.port.output.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +39,7 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepository {
 
     @Override
     public Optional<CustomerEntity> findByCompanyEmail(String email) {
-        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findCustomerDataByCompanyEmail(email).get(), CustomerEntity.class));
+        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findCustomerDataByCompanyEmail(email), CustomerEntity.class));
     }
 
     @Override
@@ -47,17 +48,17 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepository {
     }
 
     @Override
-    public CustomerEntity save(CustomerEntity entity) {
-        return null;
+    public void save(CustomerEntity entity) {
+        repository.save(entityAssembler.assembleDomain(entity, CustomerData.class));
     }
 
     @Override
     public Optional<CustomerEntity> findDni(String dni) {
-        return Optional.empty();
+        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findByDni(dni), CustomerEntity.class));
     }
 
     @Override
-    public Optional<CustomerEntity> findPhone(int phone) {
-        return Optional.empty();
+    public Optional<CustomerEntity> findPhone(String phone) {
+        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findByPhone(phone), CustomerEntity.class));
     }
 }
