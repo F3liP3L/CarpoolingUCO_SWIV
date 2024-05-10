@@ -47,6 +47,23 @@ public class CustomerEntity {
         setRol(UtilNumeric.ZERO);
     }
 
+    public CustomerEntity(UUID id) {
+        setId(id);
+        setFirstName(EMPTY);
+        setPassword(EMPTY);
+        setCompanyEmail(EMPTY);
+        setDni(EMPTY);
+        setSecondName(EMPTY);
+        setFirstSurname(EMPTY);
+        setSecondSurname(EMPTY);
+        setPhone(EMPTY);
+        setRol(UtilNumeric.ZERO);
+    }
+
+    public static CustomerEntity create(UUID id) {
+        return new CustomerEntity(id);
+    }
+
     public UUID getId() { return id; }
 
     public void setId(UUID id) {

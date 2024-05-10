@@ -1,7 +1,8 @@
 package co.edu.uco.infrastructure.controller;
 
-import co.edu.uco.application.dto.AuthorizedCategoryDTO;
+import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
 import co.edu.uco.crosscutting.exception.GeneralException;
+import co.edu.uco.entity.AuthorizedCategoryEntity;
 import co.edu.uco.infrastructure.controller.response.Response;
 import co.edu.uco.infrastructure.controller.response.dto.Message;
 import co.edu.uco.port.input.bussiness.authorizedcategory.ListAuthorizedCategoryAllUseCase;
@@ -17,25 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/carpooling/authorizedcategory")
 @Slf4j
 public class AuthorizedCategoryController {
-    /*@Autowired
+
+    @Autowired
     private ListAuthorizedCategoryUseCase listAuthorizedCategoryUseCase;
     @Autowired
     private ListAuthorizedCategoryAllUseCase listAuthorizedCategoryAllUseCase;
+    @Autowired
+    EntityAssembler dtoAssembler;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response<List<AuthorizedCategoryDTO>>> getOneAuthorizedCategory(@PathVariable("id") UUID id) {
-        Response<List<AuthorizedCategoryDTO>> response = new Response<>();
+    public ResponseEntity<Response<AuthorizedCategoryEntity>> getOneAuthorizedCategory(@PathVariable("id") UUID id) {
+        Response<AuthorizedCategoryEntity> response = new Response<>();
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
-            response.addData(listAuthorizedCategoryUseCase.execute(Optional.of(AuthorizedCategoryDTO.create(id))));
+            response.addData(listAuthorizedCategoryUseCase.execute(AuthorizedCategoryEntity.create(id)));
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
@@ -44,16 +47,16 @@ public class AuthorizedCategoryController {
     }
 
     @GetMapping()
-    public ResponseEntity<Response<List<AuthorizedCategoryDTO>>> getAllAuthorizedCategory() {
-        Response<List<AuthorizedCategoryDTO>> response = new Response<>();
+    public ResponseEntity<Response<List<AuthorizedCategoryEntity>>> getAllAuthorizedCategory() {
+        Response<List<AuthorizedCategoryEntity>> response = new Response<>();
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
-            response.addData(listAuthorizedCategoryAllUseCase.execute(Optional.of(AuthorizedCategoryDTO.createNewAuthorizedCategory())));
+            response.addData(listAuthorizedCategoryAllUseCase.execute());
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
         }
         return new ResponseEntity<>(response, httpStatus);
-    }*/
+    }
 }

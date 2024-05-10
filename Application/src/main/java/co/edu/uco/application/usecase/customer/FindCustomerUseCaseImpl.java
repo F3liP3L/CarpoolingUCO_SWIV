@@ -1,4 +1,4 @@
-package co.edu.uco.application.usecase.customer.impl;
+package co.edu.uco.application.usecase.customer;
 
 import co.edu.uco.entity.CustomerEntity;
 import co.edu.uco.port.input.bussiness.customer.FindCustomerUseCase;

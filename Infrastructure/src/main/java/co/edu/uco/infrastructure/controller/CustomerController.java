@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 
@@ -38,17 +39,16 @@ public class CustomerController {
     private FindCustomerUseCase findCustomerUseCase;
     @Autowired
     private ListCustomersUseCase listCustomersUseCase;
-    @Autowired
-    EntityAssembler dtoAssembler;
 
 
-    @GetMapping()
-    public ResponseEntity<Response<CustomerEntity>> getCustomer(@RequestBody CustomerDTO customer) {
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Response<CustomerEntity>> getCustomer(@PathVariable("id") UUID customer) {
         Response<CustomerEntity> response = new Response<>();
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
-            response.addData(findCustomerUseCase.execute(dtoAssembler.assembleDTO(customer, CustomerEntity.class)));
+            response.addData(findCustomerUseCase.execute(CustomerEntity.create(customer)));
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
@@ -56,7 +56,7 @@ public class CustomerController {
         return new ResponseEntity<>(response, httpStatus);
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public ResponseEntity<Response<List<CustomerEntity>>> listCustomer() {
         Response<List<CustomerEntity>> response = new Response<>();
         HttpStatus httpStatus = HttpStatus.OK;
