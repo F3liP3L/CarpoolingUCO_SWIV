@@ -2,13 +2,13 @@ package co.edu.uco.infrastructure.controller;
 
 import co.edu.uco.application.dto.CustomerDTO;
 import co.edu.uco.application.facade.customer.RegisterCustomerUseCaseFacade;
+import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
 import co.edu.uco.crosscutting.exception.GeneralException;
-import co.edu.uco.crosscutting.util.UtilUUID;
 import co.edu.uco.entity.CustomerEntity;
 import co.edu.uco.infrastructure.controller.response.Response;
 import co.edu.uco.infrastructure.controller.response.dto.Message;
-import co.edu.uco.port.input.bussiness.customer.RegisterCustomerUseCase;
-import co.edu.uco.port.output.repository.CustomerRepository;
+import co.edu.uco.port.input.bussiness.customer.FindCustomerUseCase;
+import co.edu.uco.port.input.bussiness.customer.ListCustomersUseCase;
 import co.edu.uco.util.exception.CarpoolingCustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
@@ -31,18 +32,42 @@ import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 @Slf4j
 public class CustomerController {
 
-    private final CustomerRepository customerRepository;
     @Autowired
     private RegisterCustomerUseCaseFacade customerUseCase;
+    @Autowired
+    private FindCustomerUseCase findCustomerUseCase;
+    @Autowired
+    private ListCustomersUseCase listCustomersUseCase;
+    @Autowired
+    EntityAssembler dtoAssembler;
 
-
-    public CustomerController(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
 
     @GetMapping()
-    public CustomerEntity getCustomer() {
-        return customerRepository.findById(UtilUUID.getUtilUUID().getStringToUUID("6fc6dafd-fb81-4f8f-a9e9-9b0ac8b0a6da")).get();
+    public ResponseEntity<Response<CustomerEntity>> getCustomer(@RequestBody CustomerDTO customer) {
+        Response<CustomerEntity> response = new Response<>();
+        HttpStatus httpStatus = HttpStatus.OK;
+        response.setData(new ArrayList<>());
+        try {
+            response.addData(findCustomerUseCase.execute(dtoAssembler.assembleDTO(customer, CustomerEntity.class)));
+        } catch (GeneralException exception) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
+        }
+        return new ResponseEntity<>(response, httpStatus);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Response<List<CustomerEntity>>> listCustomer() {
+        Response<List<CustomerEntity>> response = new Response<>();
+        HttpStatus httpStatus = HttpStatus.OK;
+        response.setData(new ArrayList<>());
+        try {
+            response.addData(listCustomersUseCase.execute());
+        } catch (GeneralException exception) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
+        }
+        return new ResponseEntity<>(response, httpStatus);
     }
 
     @PostMapping()

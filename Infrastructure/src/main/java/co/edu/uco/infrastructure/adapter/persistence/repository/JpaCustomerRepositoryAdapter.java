@@ -29,12 +29,12 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepository {
 
     @Override
     public Optional<CustomerEntity> findById(UUID id) {
-        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findById(id).get(), CustomerEntity.class));
+        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findById(id), CustomerEntity.class));
     }
 
     @Override
     public List<CustomerEntity> findAll() {
-        return null;
+        return repository.findAll().stream().map(entity -> entityAssembler.assembleEntity(entity, CustomerEntity.class)).toList();
     }
 
     @Override

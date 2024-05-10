@@ -18,13 +18,9 @@ public class CustomerEmailValidSpecification extends CompositeSpecification<Cust
     private CustomerRepository repository;
 
     public boolean isSatisfyBy(CustomerEntity object) {
-        try {
-            Optional<CustomerEntity> response = repository.findByCompanyEmail(object.getCompanyEmail());
-            if (response.isPresent()) {
-                throw CarpoolingCustomException.buildUserException("Please check the email listed, the phone email has already been registered.");
-            }
-        } catch (GeneralException exception) {
-            throw CarpoolingCustomException.buildUserException(exception.getUserMessage());
+        Optional<CustomerEntity> response = repository.findByCompanyEmail(object.getCompanyEmail());
+        if (response.isPresent()) {
+            throw CarpoolingCustomException.buildUserException("Please check the email listed, the phone email has already been registered.");
         }
         return true;
     }

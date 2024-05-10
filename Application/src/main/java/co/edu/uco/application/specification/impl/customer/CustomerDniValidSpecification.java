@@ -17,13 +17,9 @@ public class CustomerDniValidSpecification extends CompositeSpecification<Custom
 
     @Override
     public boolean isSatisfyBy(CustomerEntity object) {
-        try {
-            Optional<CustomerEntity> response = repository.findDni(object.getDni());
-            if (response.isPresent()){
-                throw CarpoolingCustomException.buildUserException("Please check the dni number listed, the dni number has already been registered.");
-            }
-        } catch (GeneralException exception) {
-            throw CarpoolingCustomException.buildUserException(exception.getUserMessage());
+        Optional<CustomerEntity> response = repository.findDni(object.getDni());
+        if (response.isPresent()){
+            throw CarpoolingCustomException.buildUserException("Please check the dni number listed, the dni number has already been registered.");
         }
         return true;
     }
