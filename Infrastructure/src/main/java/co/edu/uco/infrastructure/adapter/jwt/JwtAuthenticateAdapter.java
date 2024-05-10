@@ -39,7 +39,6 @@ public class JwtAuthenticateAdapter  implements PortAuthentication {
     @Override
     public JwtResponse signIn(JwtRequest request) {
         try {
-            //log.info(passwordEncoder.encode(request.getPassword()));
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getCompanyEmail(), request.getPassword()));
         } catch (BadCredentialsException exception) {
             throw CarpoolingCustomException.buildUserException("The credentials entered are incorrect.");

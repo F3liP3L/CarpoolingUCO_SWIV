@@ -39,7 +39,7 @@ public class SecurityConfig {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/carpooling/auth/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/v1/carpooling/customer","/api/v1/carpooling/driver").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/v1/carpooling-uco/customer","/api/v1/carpooling-uco/driver").permitAll()
                         .requestMatchers(HttpMethod.GET, "api/v1/carpooling/authorizedcategory/**").permitAll()
                         .anyRequest().authenticated()
                 )

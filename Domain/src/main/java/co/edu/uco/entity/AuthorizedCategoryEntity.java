@@ -14,12 +14,21 @@ public class AuthorizedCategoryEntity {
     }
 
     public AuthorizedCategoryEntity() {
-        setId(UtilUUID.getUtilUUID().DEFAULT_UUID);
+        setId(UtilUUID.getUtilUUID().getNewUUID());
         setCategory(UtilText.EMPTY);
     }
 
-    public static AuthorizedCategoryEntity createNewAuthorizedCategory() {
+    public AuthorizedCategoryEntity(UUID id) {
+        setId(id);
+        setCategory(UtilText.EMPTY);
+    }
+
+    public static AuthorizedCategoryEntity create() {
         return new AuthorizedCategoryEntity();
+    }
+
+    public static AuthorizedCategoryEntity create(UUID id) {
+        return new AuthorizedCategoryEntity(id);
     }
 
     public void setId(UUID id) {
@@ -28,5 +37,13 @@ public class AuthorizedCategoryEntity {
 
     public void setCategory(String category) {
         this.category = UtilText.getUtilText().trim(category);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }
