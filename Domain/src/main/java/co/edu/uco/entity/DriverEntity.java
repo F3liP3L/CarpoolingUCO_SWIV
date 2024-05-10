@@ -27,7 +27,7 @@ public class DriverEntity {
         super();
         setId(UtilUUID.getUtilUUID().DEFAULT_UUID);
         setLicenseNumber(EMPTY);
-        setAuthorizedCategory(AuthorizedCategoryEntity.createNewAuthorizedCategory());
+        setAuthorizedCategory(AuthorizedCategoryEntity.create());
         setCustomer(CustomerEntity.build());
     }
 
@@ -41,7 +41,7 @@ public class DriverEntity {
 
     public void setAuthorizedCategory(AuthorizedCategoryEntity authorizedCategory) {
         this.authorizedCategory = UtilObject.getUtilObject().getDefaultIsNull(authorizedCategory,
-                AuthorizedCategoryEntity.createNewAuthorizedCategory());
+                AuthorizedCategoryEntity.create());
     }
 
     public String getLicenseNumber() {

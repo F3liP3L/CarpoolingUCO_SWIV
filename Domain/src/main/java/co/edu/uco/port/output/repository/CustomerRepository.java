@@ -11,7 +11,7 @@ public interface CustomerRepository {
     List<CustomerEntity> findAll();
     Optional<CustomerEntity> findByCompanyEmail(String email);
     void deleteById(UUID id);
-    CustomerEntity save(CustomerEntity entity);
+    void save(CustomerEntity entity);
     Optional<CustomerEntity> findDni(String dni);
-    Optional<CustomerEntity> findPhone(int phone);
+    Optional<CustomerEntity> findPhone(String phone);
 }
