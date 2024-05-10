@@ -10,6 +10,6 @@ import java.util.UUID;
 public interface RouteRepository {
     void save(RouteEntity route);
     List<RouteEntity> findRouteActive();
-    Optional<RouteEntity> findByRoute(UUID id);
+    Optional<RouteEntity> findById(UUID id);
 
 }
