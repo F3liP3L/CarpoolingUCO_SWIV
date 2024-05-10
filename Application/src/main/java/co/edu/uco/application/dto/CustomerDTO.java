@@ -1,11 +1,10 @@
 package co.edu.uco.application.dto;
 
-import co.edu.uco.crosscutting.util.UtilNumeric;
-import co.edu.uco.crosscutting.util.UtilText;
-
 import java.util.UUID;
 
+import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
 import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
+import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
 import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
 import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 
@@ -37,15 +36,15 @@ public class CustomerDTO {
 
     public CustomerDTO() {
         setId(getUtilUUID().getDefaultUUID(id));
-        setDni(UtilText.EMPTY);
-        setFirstName(UtilText.EMPTY);
-        setSecondName(UtilText.EMPTY);
-        setFirstSurname(UtilText.EMPTY);
-        setSecondSurname(UtilText.EMPTY);
-        setPassword(UtilText.EMPTY);
-        setCompanyEmail(UtilText.EMPTY);
-        setPhone(UtilText.EMPTY);
-        setRol(UtilNumeric.ZERO);
+        setDni(EMPTY);
+        setFirstName(EMPTY);
+        setSecondName(EMPTY);
+        setFirstSurname(EMPTY);
+        setSecondSurname(EMPTY);
+        setPassword(EMPTY);
+        setCompanyEmail(EMPTY);
+        setPhone(EMPTY);
+        setRol(ZERO);
     }
 
     private CustomerDTO(String password, String companyEmail, int rol) {

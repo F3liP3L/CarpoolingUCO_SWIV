@@ -10,7 +10,7 @@ public class DriverPerVehicleEntity {
 
     private UUID id;
     private String name;
-    private String nameVehicle;
+    private String plate;
 
     public UUID getId() {
         return id;
@@ -20,10 +20,10 @@ public class DriverPerVehicleEntity {
         super();
     }
 
-    public DriverPerVehicleEntity(UUID id, String name, String nameVehicle) {
+    public DriverPerVehicleEntity(UUID id, String name, String plate) {
         setId(id);
         setName(name);
-        setNameVehicle(nameVehicle);
+        setPlate(plate);
     }
 
     public void setId(UUID id) {
@@ -38,19 +38,19 @@ public class DriverPerVehicleEntity {
         this.name = getUtilText().getDefault(name);
     }
 
-    public String getNameVehicle() {
-        return nameVehicle;
+    public String getPlate() {
+        return plate;
     }
 
-    public void setNameVehicle(String nameVehicle) {
-        this.nameVehicle = getUtilText().getDefault(nameVehicle);
+    public void setPlate(String plate) {
+        this.plate = getUtilText().getDefault(plate);
     }
 
-    public static final DriverPerVehicleEntity build() {
+    public static DriverPerVehicleEntity build() {
         return new DriverPerVehicleEntity();
     }
 
-    public static final DriverPerVehicleEntity build(final UUID id, final String name, final String nameVehicle) {
-        return new DriverPerVehicleEntity(id, name, nameVehicle);
+    public static DriverPerVehicleEntity build(final UUID id, final String name, final String plate) {
+        return new DriverPerVehicleEntity(id, name, plate);
     }
 }

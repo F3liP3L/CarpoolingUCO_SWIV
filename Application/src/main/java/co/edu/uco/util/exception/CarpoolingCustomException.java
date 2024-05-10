@@ -1,8 +1,8 @@
 package co.edu.uco.util.exception;
 
-import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.util.exception.enumeration.ExceptionLocation;
 import co.edu.uco.util.exception.enumeration.ExceptionType;
+import co.edu.uco.crosscutting.exception.GeneralException;
 
 import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 

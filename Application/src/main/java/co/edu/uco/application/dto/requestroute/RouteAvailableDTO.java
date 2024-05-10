@@ -26,7 +26,7 @@ public class RouteAvailableDTO {
     public RouteAvailableDTO() {
         setId(UtilUUID.getUtilUUID().getDefaultUUID(id));
         setRouteCapacity(UtilNumeric.ZERO);
-        setDriverVehicle(DriverPerVehicleDTO.create());
+        setDriverVehicle(DriverPerVehicleDTO.build());
         setOrigin(PositionDTO.build());
         setDestination(PositionDTO.build());
     }
@@ -44,7 +44,7 @@ public class RouteAvailableDTO {
     }
 
     public void setDriverVehicle(DriverPerVehicleDTO driverVehicle) {
-        this.driverVehicle = UtilObject.getUtilObject().getDefaultIsNull(driverVehicle, DriverPerVehicleDTO.create());
+        this.driverVehicle = UtilObject.getUtilObject().getDefaultIsNull(driverVehicle, DriverPerVehicleDTO.build());
     }
     public PositionDTO getOrigin() {
         return origin;

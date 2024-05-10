@@ -1,12 +1,14 @@
 package co.edu.uco.entity;
 
-import co.edu.uco.crosscutting.util.UtilNumeric;
+import co.edu.uco.crosscutting.util.UtilText;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
 import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
+import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
+import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
 
 public class CustomerEntity {
     private UUID id;
@@ -44,7 +46,7 @@ public class CustomerEntity {
         setFirstSurname(EMPTY);
         setSecondSurname(EMPTY);
         setPhone(EMPTY);
-        setRol(UtilNumeric.ZERO);
+        setRol(ZERO);
     }
 
     public CustomerEntity(UUID id) {
@@ -57,7 +59,7 @@ public class CustomerEntity {
         setFirstSurname(EMPTY);
         setSecondSurname(EMPTY);
         setPhone(EMPTY);
-        setRol(UtilNumeric.ZERO);
+        setRol(ZERO);
     }
 
     public static CustomerEntity create(UUID id) {
@@ -102,6 +104,14 @@ public class CustomerEntity {
         this.dni = getUtilText().getDefault(dni);
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = getUtilText().trim(phone);
+    }
+
     public static CustomerEntity build() {
         return new CustomerEntity();
     }
@@ -143,6 +153,6 @@ public class CustomerEntity {
     }
 
     public void setRol(int rol) {
-        this.rol = (int) UtilNumeric.getUtilNumeric().getDefault(rol);
+        this.rol = (int) getUtilNumeric().getDefault(rol);
     }
 }

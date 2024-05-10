@@ -27,7 +27,12 @@ public class PositionEntity {
     public void setLatitude(String latitude) {
         this.latitude = UtilText.getUtilText().trim(latitude);
     }
+
     public static PositionEntity build(){
         return new PositionEntity();
+    }
+
+    public static PositionEntity build(String latitude,String longitude){
+        return new PositionEntity(latitude, longitude);
     }
 }
