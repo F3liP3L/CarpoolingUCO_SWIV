@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface DriverRepositoryPostgresSQL extends JpaRepository<DriverData, UUID> {
+public interface JpaDriverRepository extends JpaRepository<DriverData, UUID> {
 }

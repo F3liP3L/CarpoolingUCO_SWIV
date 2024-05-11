@@ -1,6 +1,5 @@
 package co.edu.uco.infrastructure.controller;
 
-import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
 import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.entity.AuthorizedCategoryEntity;
 import co.edu.uco.infrastructure.controller.response.Response;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -29,8 +29,6 @@ public class AuthorizedCategoryController {
     private ListAuthorizedCategoryUseCase listAuthorizedCategoryUseCase;
     @Autowired
     private ListAuthorizedCategoryAllUseCase listAuthorizedCategoryAllUseCase;
-    @Autowired
-    EntityAssembler dtoAssembler;
 
     @GetMapping("/{id}")
     public ResponseEntity<Response<AuthorizedCategoryEntity>> getOneAuthorizedCategory(@PathVariable("id") UUID id) {
@@ -52,7 +50,7 @@ public class AuthorizedCategoryController {
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
-            response.addData(listAuthorizedCategoryAllUseCase.execute());
+            response.addData(listAuthorizedCategoryAllUseCase.execute(Optional.empty()));
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));

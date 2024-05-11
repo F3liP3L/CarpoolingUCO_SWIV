@@ -2,7 +2,6 @@ package co.edu.uco.infrastructure.controller;
 
 import co.edu.uco.application.dto.CustomerDTO;
 import co.edu.uco.application.facade.customer.RegisterCustomerUseCaseFacade;
-import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
 import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.entity.CustomerEntity;
 import co.edu.uco.infrastructure.controller.response.Response;
@@ -16,10 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 
@@ -62,7 +58,7 @@ public class CustomerController {
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
-            response.addData(listCustomersUseCase.execute());
+            response.addData(listCustomersUseCase.execute(Optional.empty()));
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));

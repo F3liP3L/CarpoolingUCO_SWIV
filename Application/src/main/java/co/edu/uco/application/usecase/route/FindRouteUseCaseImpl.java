@@ -5,8 +5,6 @@ import co.edu.uco.port.input.bussiness.route.FindRouteUseCase;
 import co.edu.uco.port.output.repository.RouteRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class FindRouteUseCaseImpl implements FindRouteUseCase {
 
@@ -17,8 +15,7 @@ public class FindRouteUseCaseImpl implements FindRouteUseCase {
     }
 
     @Override
-    public RouteEntity execute(Optional<RouteEntity> domain) {
-        routeRepository.findRouteActive();
+    public RouteEntity execute(RouteEntity domain) {
         return new RouteEntity();
     }
 }

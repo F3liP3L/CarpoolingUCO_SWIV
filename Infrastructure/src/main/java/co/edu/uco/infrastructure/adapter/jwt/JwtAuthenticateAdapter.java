@@ -4,7 +4,7 @@ import co.edu.uco.entity.CustomerEntity;
 import co.edu.uco.entity.DriverEntity;
 import co.edu.uco.entity.model.JwtRequest;
 import co.edu.uco.entity.model.JwtResponse;
-import co.edu.uco.entity.port.jwt.PortAuthentication;
+import co.edu.uco.port.input.jwt.PortAuthentication;
 import co.edu.uco.infrastructure.adapter.jwt.model.UserInformationDetailsService;
 import co.edu.uco.port.output.repository.CustomerRepository;
 import co.edu.uco.port.output.repository.DriverRepository;

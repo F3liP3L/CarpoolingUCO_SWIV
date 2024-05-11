@@ -1,6 +1,5 @@
 package co.edu.uco.entity;
 
-import co.edu.uco.crosscutting.util.UtilText;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
@@ -138,14 +137,6 @@ public class CustomerEntity {
 
     public void setSecondSurname(String secondSurname) {
         this.secondSurname = getUtilText().getDefault(secondSurname);
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = getUtilText().getDefault(phone);
     }
 
     public int getRol() {

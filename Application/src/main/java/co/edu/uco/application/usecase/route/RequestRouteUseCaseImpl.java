@@ -1,6 +1,6 @@
 package co.edu.uco.application.usecase.route;
 
-import co.edu.uco.application.specification.route.ValidRouteRequestSpecification;
+import co.edu.uco.application.specification.impl.route.ValidRouteRequestSpecification;
 import co.edu.uco.entity.DriverPerVehicleEntity;
 import co.edu.uco.entity.PositionEntity;
 import co.edu.uco.entity.RouteEntity;

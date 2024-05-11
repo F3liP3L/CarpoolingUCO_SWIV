@@ -1,4 +1,4 @@
-package co.edu.uco.entity.port.jwt;
+package co.edu.uco.port.input.jwt;
 
 import co.edu.uco.entity.CustomerEntity;
 import co.edu.uco.entity.DriverEntity;

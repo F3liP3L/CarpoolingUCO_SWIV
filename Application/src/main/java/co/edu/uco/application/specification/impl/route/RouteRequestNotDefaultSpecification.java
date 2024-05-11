@@ -1,4 +1,4 @@
-package co.edu.uco.application.specification.route;
+package co.edu.uco.application.specification.impl.route;
 
 import co.edu.uco.application.specification.CompositeSpecification;
 import co.edu.uco.entity.RouteRequestEntity;
