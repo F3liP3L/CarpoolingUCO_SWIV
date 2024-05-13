@@ -9,8 +9,6 @@ import co.edu.uco.infrastructure.adapter.jwt.model.UserInformationDetailsService
 import co.edu.uco.port.output.repository.CustomerRepository;
 import co.edu.uco.port.output.repository.DriverRepository;
 import co.edu.uco.util.exception.CarpoolingCustomException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,8 +19,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JwtAuthenticateAdapter  implements PortAuthentication {
-
-    private static final Logger log = LoggerFactory.getLogger(JwtAuthenticateAdapter.class);
     @Autowired
     private UserInformationDetailsService userInformationDetailsService;
     @Autowired

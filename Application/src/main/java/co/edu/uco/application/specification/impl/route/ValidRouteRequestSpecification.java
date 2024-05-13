@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 public class ValidRouteRequestSpecification extends CompositeSpecification<RouteRequestEntity> {
     @Autowired
     private RouteRequestNotDefaultSpecification notDefaultSpecification;
-
     @Autowired
     private RouteRequestNotInvalidSpecification notInvalidSpecification;
 

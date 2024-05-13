@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("api/v1/carpooling/auth")
+@RequestMapping("api/v1/carpooling-uco/auth")
 @Slf4j
 public class AuthenticationController {
     @Autowired

@@ -37,11 +37,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/carpooling/auth/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/carpooling-uco/auth/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/v1/carpooling-uco/customer","/api/v1/carpooling-uco/driver").permitAll()
                         .requestMatchers(HttpMethod.GET, "api/v1/carpooling/authorizedcategory/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/carpooling-uco/customer/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(jwtAuthenticationEntryPoint))
