@@ -16,6 +16,14 @@ public class SwaggerConfiguration {
     }
 
     @Bean
+    public GroupedOpenApi publicDriverApi() {
+        return GroupedOpenApi.builder()
+                .group("Driver API")
+                .pathsToMatch("/api/v1/carpooling-uco/driver/**")
+                .build();
+    }
+
+    @Bean
     public GroupedOpenApi internalProductApi() {
         return GroupedOpenApi.builder()
                 .group("Product API")

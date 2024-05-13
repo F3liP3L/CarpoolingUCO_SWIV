@@ -5,15 +5,18 @@ import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.entity.DriverEntity;
 import co.edu.uco.port.output.repository.DriverRepository;
 import co.edu.uco.util.exception.CarpoolingCustomException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
 public class DriverExistSpecification extends CompositeSpecification<DriverEntity> {
-    @Autowired
-    private DriverRepository repository;
+    private final DriverRepository repository;
+
+    public DriverExistSpecification(DriverRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
     public boolean isSatisfyBy(DriverEntity object) {
         return isExist(object);

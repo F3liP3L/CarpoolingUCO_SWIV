@@ -9,22 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class ValidCustomerSpecification extends CompositeSpecification<CustomerEntity> {
     @Autowired
-    CustomerDniValidSpecification dniValidSpecification;
+    private CustomerDniValidSpecification dniValidSpecification;
     @Autowired
-    CustomerIdValidSpecification idValidSpecification;
+    private CustomerIdValidSpecification idValidSpecification;
     @Autowired
-    CustomerEmailValidSpecification emailValidSpecification;
+    private CustomerEmailValidSpecification emailValidSpecification;
     @Autowired
-    CustomerPhoneValidSpecification phoneValidSpecification;
+    private CustomerPhoneValidSpecification phoneValidSpecification;
 
     @Override
     public boolean isSatisfyBy(CustomerEntity object) {
-        try {
-            return dniValidSpecification.and(idValidSpecification)
-                    .and(emailValidSpecification).and(phoneValidSpecification)
-                    .isSatisfyBy(object);
-        } catch (CarpoolingCustomException exception) {
-            throw exception;
-        }
+        return dniValidSpecification.and(idValidSpecification)
+                .and(emailValidSpecification).and(phoneValidSpecification)
+                .isSatisfyBy(object);
     }
 }

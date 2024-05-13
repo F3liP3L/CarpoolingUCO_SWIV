@@ -16,8 +16,8 @@ public class DriverIdValidaSpecification extends CompositeSpecification<DriverEn
     public boolean isSatisfyBy(DriverEntity object) {
         if (UtilObject.getUtilObject().isNull(object.getId())) {
             throw CarpoolingCustomException.buildUserException("Driver id can not be null");
-        } else if (UtilUUID.getUtilUUID().getStringFromUUID(object.getId()).length() != 36 || Objects.equals(object.getId().toString(),UtilUUID.DEFAULT_UUID_STRING)) {
-            throw CarpoolingCustomException.buildUserException("Invalid driver id");
+        } else if (Objects.equals(object.getId().toString(),UtilUUID.DEFAULT_UUID_STRING)) {
+            throw CarpoolingCustomException.buildUserException("Invalid driver id default value");
         }
         return true;
     }
