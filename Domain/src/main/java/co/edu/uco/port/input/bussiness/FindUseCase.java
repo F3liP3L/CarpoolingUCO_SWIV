@@ -1,5 +1,5 @@
 package co.edu.uco.port.input.bussiness;
 
-public interface FindUseCase<D> {
-    D execute(D domain);
+public interface FindUseCase<D, T> {
+    D execute(T param);
 }

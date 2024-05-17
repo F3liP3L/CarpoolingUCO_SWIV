@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class FindCustomerUseCaseImpl implements FindCustomerUseCase {
@@ -16,8 +17,8 @@ public class FindCustomerUseCaseImpl implements FindCustomerUseCase {
     private CustomerRepository customerRepository;
 
     @Override
-    public CustomerEntity execute(CustomerEntity domain) {
-        Optional<CustomerEntity> customerEntity = customerRepository.findById(domain.getId());
+    public CustomerEntity execute(UUID domain) {
+        Optional<CustomerEntity> customerEntity = customerRepository.findById(domain);
         if (customerEntity.isEmpty()) {
             throw CarpoolingCustomException.buildUserException("The customer does not exist in the application.");
         }

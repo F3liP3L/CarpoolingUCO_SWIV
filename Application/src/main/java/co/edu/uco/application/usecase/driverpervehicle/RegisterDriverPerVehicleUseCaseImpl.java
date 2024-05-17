@@ -1,6 +1,6 @@
-package co.edu.uco.application.usecase.driverpervehicle.impl;
+package co.edu.uco.application.usecase.driverpervehicle;
 
-import co.edu.uco.application.usecase.driverpervehicle.RegisterDriverPerVehicleUseCase;
+import co.edu.uco.port.input.bussiness.driverpervehicle.RegisterDriverPerVehicleUseCase;
 import co.edu.uco.entity.DriverPerVehicleEntity;
 import co.edu.uco.port.output.repository.DriverPerVehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;

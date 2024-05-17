@@ -1,4 +1,4 @@
-package co.edu.uco.application.usecase.driverpervehicle;
+package co.edu.uco.port.input.bussiness.driverpervehicle;
 
 import co.edu.uco.entity.DriverPerVehicleEntity;
 import co.edu.uco.port.input.bussiness.UseCase;

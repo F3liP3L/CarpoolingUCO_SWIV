@@ -1,10 +1,10 @@
-package co.edu.uco.application.usecase.driver.impl;
+package co.edu.uco.application.usecase.driver;
 
 
 import co.edu.uco.application.specification.impl.driver.ValidDriverSpecification;
-import co.edu.uco.application.usecase.driver.RegisterDriverUseCase;
 import co.edu.uco.entity.CustomerEntity;
 import co.edu.uco.entity.DriverEntity;
+import co.edu.uco.port.input.bussiness.driver.RegisterDriverUseCase;
 import co.edu.uco.port.input.jwt.PortAuthentication;
 import co.edu.uco.port.input.bussiness.customer.RegisterCustomerUseCase;
 import co.edu.uco.port.output.repository.DriverRepository;
@@ -25,7 +25,6 @@ public class RegisterDriverUseCaseImpl implements RegisterDriverUseCase {
     @Autowired
     private RegisterCustomerUseCase registerCustomerUseCase;
 
-
     @Override
     public void execute(DriverEntity domain) {
         domain.setId(getUtilUUID().getNewUUID());
@@ -34,6 +33,7 @@ public class RegisterDriverUseCaseImpl implements RegisterDriverUseCase {
         domain.setCustomer(customer);
         validDriverSpecification.isSatisfyBy(domain);
         portAuthentication.customerSignUp(domain.getCustomer());
+        registerCustomerUseCase.execute(domain.getCustomer());
         driverRepository.save(domain);
     }
 }

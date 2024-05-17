@@ -36,7 +36,7 @@ public class AuthorizedCategoryController {
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
-            response.addData(listAuthorizedCategoryUseCase.execute(AuthorizedCategoryEntity.create(id)));
+            response.addData(listAuthorizedCategoryUseCase.execute(id));
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));

@@ -3,8 +3,8 @@ package co.edu.uco.application.facade.driver.impl;
 import co.edu.uco.application.dto.DriverDTO;
 import co.edu.uco.application.facade.driver.RegisterDriverUseCaseFacade;
 import co.edu.uco.application.mapper.dtoassembler.DTOAssembler;
-import co.edu.uco.application.usecase.driver.RegisterDriverUseCase;
 import co.edu.uco.entity.DriverEntity;
+import co.edu.uco.port.input.bussiness.driver.RegisterDriverUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

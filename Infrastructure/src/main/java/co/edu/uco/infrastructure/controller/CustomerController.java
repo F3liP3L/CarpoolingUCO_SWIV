@@ -44,7 +44,7 @@ public class CustomerController {
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
-            response.addData(findCustomerUseCase.execute(CustomerEntity.create(customer)));
+            response.addData(findCustomerUseCase.execute(customer));
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));

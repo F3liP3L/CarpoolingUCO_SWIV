@@ -1,8 +1,8 @@
-package co.edu.uco.application.usecase.driverpervehicle.impl;
+package co.edu.uco.application.usecase.driverpervehicle;
 
 import co.edu.uco.application.dto.DriverPerVehicleDTO;
 import co.edu.uco.application.mapper.dtoassembler.DTOAssembler;
-import co.edu.uco.application.usecase.driverpervehicle.ListDriverPerVehicleUseCase;
+import co.edu.uco.port.input.bussiness.driverpervehicle.ListDriverPerVehicleUseCase;
 import co.edu.uco.entity.DriverPerVehicleEntity;
 import co.edu.uco.port.output.repository.DriverPerVehicleRepository;
 import co.edu.uco.util.exception.CarpoolingCustomException;
@@ -22,13 +22,11 @@ public class ListDriverPerVehicleUseCaseImpl implements ListDriverPerVehicleUseC
     @Autowired
     private DTOAssembler<DriverPerVehicleDTO, DriverPerVehicleEntity> entityAssembler;
 
-
     @Override
-    public List<DriverPerVehicleDTO> execute(Optional<DriverPerVehicleDTO> dto) {
+    public List<DriverPerVehicleEntity> execute(Optional<DriverPerVehicleEntity> dto) {
         if (dto.isEmpty()) {
             throw CarpoolingCustomException.buildTechnicalException("Can not find the driver per vehicle, please try again");
         }
-        return repository.findAll().stream()
-                .map(driverPerVehicleEntity -> entityAssembler.assembleDTO(driverPerVehicleEntity)).toList();
+        return repository.findAll();
     }
 }

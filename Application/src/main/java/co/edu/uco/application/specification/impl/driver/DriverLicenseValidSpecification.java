@@ -13,7 +13,7 @@ public class DriverLicenseValidSpecification extends CompositeSpecification<Driv
 
     @Override
     public boolean isSatisfyBy(DriverEntity object) {
-        if (UtilNumeric.getUtilNumeric().isGreaterThan(object.getLicenseNumber().length(), LICENSE_NUMBER_MIN)){
+        if (UtilNumeric.getUtilNumeric().isLessOrEqualThan(object.getLicenseNumber().length(), LICENSE_NUMBER_MIN)){
             throw CarpoolingCustomException.buildUserException("Please check the license number is to short, error try to add driver");
         }
         return true;

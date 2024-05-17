@@ -3,7 +3,7 @@ package co.edu.uco.application.facade.driverpervehicle.impl;
 import co.edu.uco.application.dto.DriverPerVehicleDTO;
 import co.edu.uco.application.facade.driverpervehicle.RegisterDriverPerVehicleUseCaseFacade;
 import co.edu.uco.application.mapper.dtoassembler.DTOAssembler;
-import co.edu.uco.application.usecase.driverpervehicle.RegisterDriverPerVehicleUseCase;
+import co.edu.uco.port.input.bussiness.driverpervehicle.RegisterDriverPerVehicleUseCase;
 import co.edu.uco.entity.DriverPerVehicleEntity;
 import org.springframework.stereotype.Component;
 
