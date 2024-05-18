@@ -3,12 +3,14 @@ package co.edu.uco.application.usecase.driver;
 import co.edu.uco.port.input.bussiness.driver.DeleteDriverUseCase;
 import co.edu.uco.port.output.repository.DriverRepository;
 import co.edu.uco.util.exception.CarpoolingCustomException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 
 @Service
+@Transactional
 public class DeleteDriverUseCaseImpl implements DeleteDriverUseCase {
 
     private final DriverRepository driverRepository;

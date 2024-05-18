@@ -30,9 +30,9 @@ public class SwaggerConfiguration {
                         )
                 )
                 .info(new Info()
-                        .title("Case Management Service")
-                        .description("Claim Event Information")
-                        .version("1.0")
+                        .title("Carpooling UCO API")
+                        .description("All events for each of the entities of the uco carpoling application ")
+                        .version("0.0.1-SNAPSHOT")
                 );
     }
 
@@ -49,6 +49,14 @@ public class SwaggerConfiguration {
         return GroupedOpenApi.builder()
                 .group("Driver API")
                 .pathsToMatch("/api/v1/carpooling-uco/driver/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi publicVehicleApi() {
+        return GroupedOpenApi.builder()
+                .group("Vehicle API")
+                .pathsToMatch("/api/v1/carpooling-uco/vehicle/**")
                 .build();
     }
 

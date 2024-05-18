@@ -7,13 +7,16 @@ import co.edu.uco.entity.DriverEntity;
 import co.edu.uco.port.input.bussiness.driver.RegisterDriverUseCase;
 import co.edu.uco.port.input.bussiness.customer.RegisterCustomerUseCase;
 import co.edu.uco.port.output.repository.DriverRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 
 @Service
+@Transactional
 public class RegisterDriverUseCaseImpl implements RegisterDriverUseCase {
+
     @Autowired
     private DriverRepository driverRepository;
     @Autowired
