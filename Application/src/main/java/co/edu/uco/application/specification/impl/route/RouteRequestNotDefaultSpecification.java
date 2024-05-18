@@ -1,13 +1,12 @@
-package co.edu.uco.application.specification.route;
+package co.edu.uco.application.specification.impl.route;
 
 import co.edu.uco.application.specification.CompositeSpecification;
 import co.edu.uco.entity.RouteRequestEntity;
-import co.edu.uco.util.constants.ConstantsCarpooling;
 import co.edu.uco.util.exception.CarpoolingCustomException;
 import org.springframework.stereotype.Component;
 
+import static co.edu.uco.crosscutting.util.UtilText.ONLY_ANY_NUMBER;
 import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.util.constants.ConstantsCarpooling.ONLY_ANY_NUMBER;
 
 @Component
 public class RouteRequestNotDefaultSpecification extends CompositeSpecification<RouteRequestEntity> {

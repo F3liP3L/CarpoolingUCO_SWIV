@@ -2,7 +2,7 @@ package co.edu.uco.infrastructure.controller;
 
 import co.edu.uco.entity.model.JwtRequest;
 import co.edu.uco.entity.model.JwtResponse;
-import co.edu.uco.entity.port.jwt.PortAuthentication;
+import co.edu.uco.port.input.jwt.PortAuthentication;
 import co.edu.uco.infrastructure.controller.response.Response;
 import co.edu.uco.infrastructure.controller.response.dto.Message;
 import co.edu.uco.util.exception.CarpoolingCustomException;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("api/v1/carpooling/auth")
+@RequestMapping("api/v1/carpooling-uco/auth")
 @Slf4j
 public class AuthenticationController {
     @Autowired
