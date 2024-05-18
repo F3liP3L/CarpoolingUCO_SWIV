@@ -1,7 +1,6 @@
 package co.edu.uco.entity;
 
-import co.edu.uco.crosscutting.util.UtilNumeric;
-import co.edu.uco.crosscutting.util.UtilObject;
+import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
@@ -38,6 +37,8 @@ public class VehicleEntity {
         this.capacity = capacity;
     }
 
+    public UUID getId() { return id; }
+
     public String getPlate() {
         return plate;
     }
@@ -55,7 +56,7 @@ public class VehicleEntity {
     }
 
     public void setId(UUID id) {
-        this.id = id == null ? getUtilUUID().getNewUUID() : getUtilUUID().getDefaultUUID(id);
+        this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
     }
 
     public void setPlate(String plate) {
