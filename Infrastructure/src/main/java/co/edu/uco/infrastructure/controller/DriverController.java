@@ -1,14 +1,13 @@
 package co.edu.uco.infrastructure.controller;
 
 import co.edu.uco.application.dto.DriverDTO;
+import co.edu.uco.application.facade.driver.FindDriverUseCaseFacade;
+import co.edu.uco.application.facade.driver.ListAllDriverUseCaseFacade;
 import co.edu.uco.application.facade.driver.RegisterDriverUseCaseFacade;
 import co.edu.uco.crosscutting.exception.GeneralException;
-import co.edu.uco.entity.DriverEntity;
 import co.edu.uco.infrastructure.controller.response.Response;
 import co.edu.uco.infrastructure.controller.response.dto.Message;
 import co.edu.uco.port.input.bussiness.driver.DeleteDriverUseCase;
-import co.edu.uco.port.input.bussiness.driver.FindDriverUseCase;
-import co.edu.uco.port.input.bussiness.driver.ListDriverUseCase;
 import co.edu.uco.util.exception.CarpoolingCustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,34 +27,33 @@ public class DriverController {
     @Autowired
     private RegisterDriverUseCaseFacade registerDriverUseCaseFacade;
     @Autowired
-    private ListDriverUseCase listDriverUseCase;
+    private ListAllDriverUseCaseFacade listAllDriverUseCaseFacade;
     @Autowired
     private DeleteDriverUseCase deleteDriverUseCase;
     @Autowired
-    private FindDriverUseCase findDriverUseCase;
+    private FindDriverUseCaseFacade findDriverUseCaseFacade;
 
-    /*
     @GetMapping()
     public ResponseEntity<Response<List<DriverDTO>>> getAllCustomer() {
         Response<List<DriverDTO>> response = new Response<>();
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
-            response.addData(listDriverUseCase.execute(Optional.of(DriverDTO.create())));
+            response.addData(listAllDriverUseCaseFacade.execute(Optional.of(DriverDTO.create())));
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
         }
         return new ResponseEntity<>(response, httpStatus);
-    }*/
+    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response<DriverEntity>> getCustomer(@PathVariable("id") UUID id) {
-        Response<DriverEntity> response = new Response<>();
+    public ResponseEntity<Response<DriverDTO>> getCustomer(@PathVariable("id") UUID id) {
+        Response<DriverDTO> response = new Response<>();
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
-            response.addData(findDriverUseCase.execute(id));
+            response.addData(findDriverUseCaseFacade.execute(id));
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
