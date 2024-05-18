@@ -1,20 +1,27 @@
 package co.edu.uco.application.usecase.driver;
 
-import co.edu.uco.entity.DriverEntity;
 import co.edu.uco.port.input.bussiness.driver.DeleteDriverUseCase;
 import co.edu.uco.port.output.repository.DriverRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import co.edu.uco.util.exception.CarpoolingCustomException;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 
 @Service
 public class DeleteDriverUseCaseImpl implements DeleteDriverUseCase {
 
-    @Autowired
-    private DriverRepository driverRepository;
+    private final DriverRepository driverRepository;
+
+    public DeleteDriverUseCaseImpl(DriverRepository driverRepository) {
+        this.driverRepository = driverRepository;
+    }
 
     @Override
-    public void execute(DriverEntity domain) {
-        driverRepository.deleteById(domain.getId());
+    public void execute(UUID id) {
+        if (driverRepository.findById(id).isEmpty()) {
+            throw CarpoolingCustomException.buildTechnicalException("Driver not found", String.format("The Driver with id %s does not exist in the database", id));
+        }
+        driverRepository.deleteById(id);
     }
 }

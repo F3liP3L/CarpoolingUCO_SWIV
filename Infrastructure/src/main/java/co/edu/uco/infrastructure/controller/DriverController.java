@@ -1,12 +1,12 @@
 package co.edu.uco.infrastructure.controller;
 
 import co.edu.uco.application.dto.DriverDTO;
-import co.edu.uco.application.facade.driver.DeleteDriverUseCaseFacade;
 import co.edu.uco.application.facade.driver.RegisterDriverUseCaseFacade;
 import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.entity.DriverEntity;
 import co.edu.uco.infrastructure.controller.response.Response;
 import co.edu.uco.infrastructure.controller.response.dto.Message;
+import co.edu.uco.port.input.bussiness.driver.DeleteDriverUseCase;
 import co.edu.uco.port.input.bussiness.driver.FindDriverUseCase;
 import co.edu.uco.port.input.bussiness.driver.ListDriverUseCase;
 import co.edu.uco.util.exception.CarpoolingCustomException;
@@ -30,7 +30,7 @@ public class DriverController {
     @Autowired
     private ListDriverUseCase listDriverUseCase;
     @Autowired
-    private DeleteDriverUseCaseFacade deleteDriverUseCaseFacade;
+    private DeleteDriverUseCase deleteDriverUseCase;
     @Autowired
     private FindDriverUseCase findDriverUseCase;
 
@@ -92,13 +92,13 @@ public class DriverController {
         return responseEntity;
     }
 
-    @DeleteMapping()
-    public ResponseEntity<Response<DriverDTO>> deleteDriver(@RequestBody DriverDTO driver) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<DriverDTO>> deleteDriver(@PathVariable UUID id) {
         Response<DriverDTO> response = new Response<>();
         ResponseEntity<Response<DriverDTO>> responseEntity;
         HttpStatus httpStatus = HttpStatus.OK;
         try {
-            deleteDriverUseCaseFacade.execute(driver);
+            deleteDriverUseCase.execute(id);
             response.addMessage(Message.createSuccessMessage("The Driver was successfully removed", "Driver successfully removed"));
             log.info(response.toString());
         } catch (CarpoolingCustomException exception) {

@@ -23,6 +23,10 @@ public class CarpoolingCustomException extends GeneralException {
         return new CarpoolingCustomException(null, technicalMessage, null, ExceptionType.TECHNICAL, null);
     }
 
+    public static CarpoolingCustomException buildTechnicalException(String userMessage, String technicalMessage) {
+        return new CarpoolingCustomException(userMessage, technicalMessage, null, ExceptionType.TECHNICAL, ExceptionLocation.APPLICATION);
+    }
+
     public static CarpoolingCustomException buildTechnicalException(String technicalMessage, Exception rootException, ExceptionLocation location) {
         return new CarpoolingCustomException(null, technicalMessage, rootException, ExceptionType.TECHNICAL, location);
     }

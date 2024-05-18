@@ -19,13 +19,9 @@ public class DriverCategoryValidSpecification extends CompositeSpecification<Dri
 
     @Override
     public boolean isSatisfyBy(DriverEntity object) {
-        try {
-            Optional<DriverEntity> response = repository.getDriverByCustomer(object.getCustomer().getId());
-            if (response.isPresent()) {
-                throw CarpoolingCustomException.buildUserException("The driver is already registered with this role in the application.");
-            }
-        } catch (CarpoolingCustomException exception) {
-            throw CarpoolingCustomException.buildUserException("Unexpect error try to add driver, please try again");
+        Optional<DriverEntity> response = repository.findDriverByLicenseNumber(object.getLicenseNumber());
+        if (response.isPresent()) {
+                throw CarpoolingCustomException.buildUserException("Exist driver with the same license number registered");
         }
         return true;
     }

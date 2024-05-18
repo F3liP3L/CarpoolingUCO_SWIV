@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class DriverIdValidaSpecification extends CompositeSpecification<DriverEntity> {
+public class DriverIdValidSpecification extends CompositeSpecification<DriverEntity> {
     @Override
     public boolean isSatisfyBy(DriverEntity object) {
         if (UtilObject.getUtilObject().isNull(object.getId())) {

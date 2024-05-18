@@ -9,6 +9,7 @@ import java.util.UUID;
 public interface DriverRepository {
     Optional<DriverEntity> findById(UUID id);
     Optional<DriverEntity> getDriverByCustomer(UUID idCustomer);
+    Optional<DriverEntity> findDriverByLicenseNumber(String licenseNumber);
     void deleteById(UUID id);
     List<DriverEntity> findAllDriver();
     void save(DriverEntity driverEntity);

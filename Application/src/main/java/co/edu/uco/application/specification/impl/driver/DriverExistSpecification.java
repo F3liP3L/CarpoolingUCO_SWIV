@@ -28,6 +28,7 @@ public class DriverExistSpecification extends CompositeSpecification<DriverEntit
             if (response.isPresent()) {
                 throw CarpoolingCustomException.buildUserException("The driver you are trying to register exists.");
             }
+
             return true;
         } catch (CarpoolingCustomException exception) {
             throw exception;
