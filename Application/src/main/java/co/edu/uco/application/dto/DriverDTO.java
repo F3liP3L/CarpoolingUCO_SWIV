@@ -1,11 +1,8 @@
 package co.edu.uco.application.dto;
 
-import co.edu.uco.crosscutting.util.UtilObject;
-import co.edu.uco.crosscutting.util.UtilText;
-import co.edu.uco.crosscutting.util.UtilUUID;
-
 import java.util.UUID;
 
+import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
 import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
 import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
@@ -61,7 +58,7 @@ public class DriverDTO {
     }
 
     public void setAuthorizedCategory(AuthorizedCategoryDTO authorizedCategory) {
-        this.authorizedCategory = UtilObject.getUtilObject().getDefaultIsNull(authorizedCategory,
+        this.authorizedCategory = getUtilObject().getDefaultIsNull(authorizedCategory,
                 AuthorizedCategoryDTO.createNewAuthorizedCategory());
     }
 
@@ -70,6 +67,6 @@ public class DriverDTO {
     }
 
     public void setCustomer(CustomerDTO customer) {
-        this.customer = UtilObject.getUtilObject().getDefaultIsNull(customer, CustomerDTO.create());
+        this.customer = getUtilObject().getDefaultIsNull(customer, CustomerDTO.create());
     }
 }

@@ -2,6 +2,7 @@ package co.edu.uco.application.usecase.vehicle;
 
 import co.edu.uco.application.specification.impl.vehicle.ValidVehicleSpecification;
 import co.edu.uco.crosscutting.exception.GeneralException;
+import co.edu.uco.crosscutting.util.UtilUUID;
 import co.edu.uco.entity.VehicleEntity;
 import co.edu.uco.port.input.bussiness.vehicle.RegisterVehicleUseCase;
 import co.edu.uco.port.output.repository.VehicleRepository;
@@ -25,6 +26,7 @@ public class RegisterVehicleUseCaseImpl implements RegisterVehicleUseCase {
     @Override
     public void execute(VehicleEntity domain) {
         try {
+            domain.setId(UtilUUID.getUtilUUID().getNewUUID());
             specification.isSatisfyBy(domain);
             repository.save(domain);
         } catch (CarpoolingCustomException exception) {
