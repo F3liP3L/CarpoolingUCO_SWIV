@@ -23,7 +23,7 @@ public class JpaVehicleRepositoryAdapter implements VehicleRepository {
 
     @Override
     public Optional<VehicleEntity> findById(UUID id) {
-        return Optional.of(entityAssembler.assembleEntity(repository.findById(id), VehicleEntity.class));
+        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findById(id), VehicleEntity.class));
     }
 
     @Override
@@ -33,13 +33,11 @@ public class JpaVehicleRepositoryAdapter implements VehicleRepository {
 
     @Override
     public Optional<VehicleEntity> findByPlate(String plate) {
-        return Optional.of(entityAssembler.assembleEntity(repository.findByPlate(plate), VehicleEntity.class));
+        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findByPlate(plate), VehicleEntity.class));
     }
 
     @Override
-    public void deleteById(UUID id) {
-        repository.deleteById(id);
-    }
+    public void deleteById(UUID id) { repository.deleteById(id); }
 
     @Override
     public void save(VehicleEntity entity) {
