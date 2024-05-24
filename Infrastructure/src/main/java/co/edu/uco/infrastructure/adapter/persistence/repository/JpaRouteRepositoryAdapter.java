@@ -4,7 +4,10 @@ import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
 import co.edu.uco.entity.RouteEntity;
 import co.edu.uco.infrastructure.adapter.persistence.RouteData;
 import co.edu.uco.port.output.repository.RouteRepository;
+import co.edu.uco.util.exception.CarpoolingCustomException;
 import co.edu.uco.util.json.UtilMapperJson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +48,16 @@ public class JpaRouteRepositoryAdapter implements RouteRepository {
 
     @Override
     public Optional<RouteEntity> findById(UUID id) {
-        return repository.findById(id).map(elem -> entityAssembler.assembleEntity(elem, RouteEntity.class));
+        Optional<RouteData> response = repository.findById(id);
+        if (response.isPresent()) {
+            RouteEntity route = entityAssembler.assembleEntity(response.get(), RouteEntity.class);
+            try {
+                route.setPositions(mapperJson.execute(response.get().getPositions(), new TypeReference<>() {}));
+            } catch (JsonProcessingException exception) {
+                throw CarpoolingCustomException.buildTechnicalException(exception.getMessage());
+            }
+            return Optional.of(route);
+        }
+        return Optional.empty();
     }
 }
