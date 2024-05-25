@@ -37,6 +37,14 @@ public class SwaggerConfiguration {
     }
 
     @Bean
+    public GroupedOpenApi authorizedCategory() {
+        return GroupedOpenApi.builder()
+                .group("Authorized Category API")
+                .pathsToMatch("/api/v1/carpooling-uco/authorizedcategory/**")
+                .build();
+    }
+
+    @Bean
     public GroupedOpenApi publicUserApi() {
         return GroupedOpenApi.builder()
                 .group("User API")

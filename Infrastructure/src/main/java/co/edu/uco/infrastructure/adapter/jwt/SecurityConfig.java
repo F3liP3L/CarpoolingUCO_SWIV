@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/carpooling-uco/auth/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/v1/carpooling-uco/customer","/api/v1/carpooling-uco/driver").permitAll()
-                        .requestMatchers(HttpMethod.GET, "api/v1/carpooling/authorizedcategory/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/v1/carpooling-uco/authorizedcategory/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
