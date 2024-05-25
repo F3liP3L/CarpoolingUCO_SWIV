@@ -1,6 +1,7 @@
 package co.edu.uco.infrastructure.adapter.persistence.repository;
 
 import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
+import co.edu.uco.entity.PositionEntity;
 import co.edu.uco.entity.RouteEntity;
 import co.edu.uco.infrastructure.adapter.persistence.RouteData;
 import co.edu.uco.port.output.repository.RouteRepository;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -43,7 +45,13 @@ public class JpaRouteRepositoryAdapter implements RouteRepository {
 
     @Override
     public List<RouteEntity> findRouteActive() {
-        return repository.findAll().stream().map(elem -> entityAssembler.assembleEntity(elem, RouteEntity.class)).toList();
+        List<RouteData> routes = repository.findByRouteTimeAfter(LocalDateTime.now());
+        return routes.stream().map(route -> {
+            RouteEntity routeAvailable = entityAssembler.assembleEntity(route, RouteEntity.class);
+            routeAvailable.setOrigin(mapperJson.execute(route.getOrigin(), PositionEntity.class).get());
+            routeAvailable.setDestination(mapperJson.execute(route.getDestination(), PositionEntity.class).get());
+            return routeAvailable;
+        }).toList();
     }
 
     @Override

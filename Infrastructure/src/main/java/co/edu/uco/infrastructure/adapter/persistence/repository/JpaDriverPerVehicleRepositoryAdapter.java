@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static co.edu.uco.crosscutting.util.UtilText.SPACE;
-
 @Component
 public class JpaDriverPerVehicleRepositoryAdapter implements DriverPerVehicleRepository {
 
@@ -24,11 +22,8 @@ public class JpaDriverPerVehicleRepositoryAdapter implements DriverPerVehicleRep
     }
 
     @Override
-    public DriverPerVehicleEntity findById(UUID id) {
-        DriverPerVehicleData data = repository.findById(id).get();
-        return DriverPerVehicleEntity.build(id
-                ,data.getVehicle().getOwner().getCustomer().getFirstName().concat(SPACE.concat(data.getVehicle().getOwner().getCustomer().getFirstSurname()))
-                ,data.getVehicle().getPlate());
+    public Optional<DriverPerVehicleEntity> findById(UUID id) {
+        return repository.findById(id).map(data -> entityAssembler.assembleDomain(data, DriverPerVehicleEntity.class));
     }
 
     @Override

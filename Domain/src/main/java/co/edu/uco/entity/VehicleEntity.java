@@ -51,7 +51,7 @@ public class VehicleEntity {
         return owner;
     }
 
-    public static VehicleEntity createNewVehicle() {
+    public static VehicleEntity build() {
         return new VehicleEntity();
     }
 
