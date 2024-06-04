@@ -9,17 +9,14 @@ import co.edu.uco.util.exception.CarpoolingCustomException;
 import co.edu.uco.util.json.UtilMapperJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Component
-@Transactional
 public class JpaRouteRepositoryAdapter implements RouteRepository {
 
     private final JpaRouteRepository repository;
@@ -71,5 +68,10 @@ public class JpaRouteRepositoryAdapter implements RouteRepository {
             return Optional.of(route);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
     }
 }
