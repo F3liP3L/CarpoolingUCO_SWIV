@@ -1,13 +1,19 @@
 package co.edu.uco.infrastructure.adapter.persistence.repository;
 
 import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
+import co.edu.uco.entity.PositionEntity;
 import co.edu.uco.entity.RouteEntity;
 import co.edu.uco.infrastructure.adapter.persistence.RouteData;
 import co.edu.uco.port.output.repository.RouteRepository;
+import co.edu.uco.util.exception.CarpoolingCustomException;
 import co.edu.uco.util.json.UtilMapperJson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -40,11 +46,30 @@ public class JpaRouteRepositoryAdapter implements RouteRepository {
 
     @Override
     public List<RouteEntity> findRouteActive() {
-        return repository.findAll().stream().map(elem -> entityAssembler.assembleEntity(elem, RouteEntity.class)).toList();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime tenMinutesAgo = now.minusMinutes(10);
+
+        List<RouteData> routes = repository.findByRouteTimeIsAfter(tenMinutesAgo);
+        return routes.stream().map(route -> {
+            RouteEntity routeAvailable = entityAssembler.assembleEntity(route, RouteEntity.class);
+            routeAvailable.setOrigin(mapperJson.execute(route.getOrigin(), PositionEntity.class).get());
+            routeAvailable.setDestination(mapperJson.execute(route.getDestination(), PositionEntity.class).get());
+            return routeAvailable;
+        }).toList();
     }
 
     @Override
     public Optional<RouteEntity> findById(UUID id) {
-        return repository.findById(id).map(elem -> entityAssembler.assembleEntity(elem, RouteEntity.class));
+        Optional<RouteData> response = repository.findById(id);
+        if (response.isPresent()) {
+            RouteEntity route = entityAssembler.assembleEntity(response.get(), RouteEntity.class);
+            try {
+                route.setPositions(mapperJson.execute(response.get().getPositions(), new TypeReference<>() {}));
+            } catch (JsonProcessingException exception) {
+                throw CarpoolingCustomException.buildTechnicalException(exception.getMessage());
+            }
+            return Optional.of(route);
+        }
+        return Optional.empty();
     }
 }

@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/carpooling/authorizedcategory")
+@RequestMapping("api/v1/carpooling-uco/authorizedcategory")
 @Slf4j
 public class AuthorizedCategoryController {
 

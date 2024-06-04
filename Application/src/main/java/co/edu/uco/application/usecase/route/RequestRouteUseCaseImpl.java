@@ -9,7 +9,10 @@ import co.edu.uco.port.input.bussiness.route.RequestRouteUseCase;
 import co.edu.uco.port.input.route.RouteServicePort;
 import co.edu.uco.port.output.repository.DriverPerVehicleRepository;
 import co.edu.uco.port.output.repository.StatusRepository;
+import co.edu.uco.util.exception.CarpoolingCustomException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 
@@ -39,8 +42,11 @@ public class RequestRouteUseCaseImpl implements RequestRouteUseCase {
         routeEntity.setOrigin(PositionEntity.build(request.getOrigin().getLatitude(), request.getOrigin().getLongitude()));
         routeEntity.getDriverVehicle().setId(request.getDriverVehicle().getId());
 
-        DriverPerVehicleEntity driverVehicle = driverVehicleRepository.findById(request.getDriverVehicle().getId());
-        routeEntity.setDriverVehicle(driverVehicle);
+        Optional<DriverPerVehicleEntity> driverVehicle = driverVehicleRepository.findById(request.getDriverVehicle().getId());
+        if (driverVehicle.isEmpty()) {
+            throw CarpoolingCustomException.buildUserException("The driver per vehicle does not exist");
+        }
+        routeEntity.setDriverVehicle(driverVehicle.get());
         routeEntity.setRouteStatus(statusRepository.findByStatus(STATUS));
         return routeEntity;
     }

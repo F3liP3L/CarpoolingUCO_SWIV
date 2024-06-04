@@ -4,13 +4,14 @@ import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
+import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
+import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
 
 public class DriverPerVehicleEntity {
 
     private UUID id;
-    private String name;
-    private String plate;
+    private VehicleEntity vehicle;
+    private String status;
 
     public UUID getId() {
         return id;
@@ -20,37 +21,35 @@ public class DriverPerVehicleEntity {
         super();
     }
 
-    public DriverPerVehicleEntity(UUID id, String name, String plate) {
+    public DriverPerVehicleEntity(UUID id, VehicleEntity vehicle ,String status) {
         setId(id);
-        setName(name);
-        setPlate(plate);
+        setVehicle(vehicle);
+        setStatus(status);
     }
 
     public void setId(UUID id) {
         this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
     }
 
-    public String getName() {
-        return name;
+    public VehicleEntity getVehicle() { return vehicle; }
+
+    public void setVehicle(VehicleEntity vehicle) {
+        this.vehicle = getUtilObject().getDefaultIsNull(vehicle, VehicleEntity.build());
     }
 
-    public void setName(String name) {
-        this.name = getUtilText().getDefault(name);
+    public String getStatus() {
+        return status;
     }
 
-    public String getPlate() {
-        return plate;
-    }
-
-    public void setPlate(String plate) {
-        this.plate = getUtilText().getDefault(plate);
+    public void setStatus(String status) {
+        this.status = getUtilObject().getDefaultIsNull(status,EMPTY);
     }
 
     public static DriverPerVehicleEntity build() {
         return new DriverPerVehicleEntity();
     }
 
-    public static DriverPerVehicleEntity build(final UUID id, final String name, final String plate) {
-        return new DriverPerVehicleEntity(id, name, plate);
+    public static DriverPerVehicleEntity build(final UUID id) {
+        return new DriverPerVehicleEntity(id, VehicleEntity.build(), EMPTY);
     }
 }
