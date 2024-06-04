@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -45,7 +46,10 @@ public class JpaRouteRepositoryAdapter implements RouteRepository {
 
     @Override
     public List<RouteEntity> findRouteActive() {
-        List<RouteData> routes = repository.findByRouteTimeAfter(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime tenMinutesAgo = now.minusMinutes(10);
+
+        List<RouteData> routes = repository.findByRouteTimeIsAfter(tenMinutesAgo);
         return routes.stream().map(route -> {
             RouteEntity routeAvailable = entityAssembler.assembleEntity(route, RouteEntity.class);
             routeAvailable.setOrigin(mapperJson.execute(route.getOrigin(), PositionEntity.class).get());

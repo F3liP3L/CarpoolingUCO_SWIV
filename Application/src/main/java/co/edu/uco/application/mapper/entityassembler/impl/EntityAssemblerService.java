@@ -27,9 +27,4 @@ public class EntityAssemblerService implements EntityAssembler {
     public <E, T> T assembleDTO(E entity, Class<T> dtoClass) {
         return modelMapper.map(entity, dtoClass);
     }
-
-    @Override
-    public <T, E> E assembleEntityByDTO(T entity, Class<E> dtoClass) {
-        return modelMapper.map(entity, dtoClass);
-    }
 }

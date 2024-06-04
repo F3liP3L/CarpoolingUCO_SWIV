@@ -10,5 +10,5 @@ import java.util.UUID;
 
 @Repository
 public interface JpaRouteRepository extends JpaRepository<RouteData, UUID> {
-    List<RouteData> findByRouteTimeAfter(LocalDateTime dateTime);
+    List<RouteData> findByRouteTimeIsAfter(LocalDateTime dateTime);
 }
