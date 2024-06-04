@@ -10,6 +10,7 @@ import co.edu.uco.application.facade.route.RequestRouteUseCaseFacade;
 import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.infrastructure.controller.response.Response;
 import co.edu.uco.infrastructure.controller.response.dto.Message;
+import co.edu.uco.port.input.bussiness.route.DeleteRouteUseCase;
 import co.edu.uco.util.exception.CarpoolingCustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,8 @@ public class RouteController {
     private RegisterRouteUseCaseFacade registerRouteUseCaseFacade;
     @Autowired
     private FindRouteUseCaseFacade findRouteUseCaseFacade;
+    @Autowired
+    private DeleteRouteUseCase deleteRouteUseCase;
     @Autowired
     private ListRouteActiveUseCaseFacade listRouteActiveUseCaseFacade;
 
@@ -108,6 +111,25 @@ public class RouteController {
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
         }
         return new ResponseEntity<>(response, httpStatus);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<RouteDTO>> deleteDriver(@PathVariable UUID id) {
+        Response<RouteDTO> response = new Response<>();
+        ResponseEntity<Response<RouteDTO>> responseEntity;
+        HttpStatus httpStatus = HttpStatus.OK;
+        try {
+            deleteRouteUseCase.execute(id);
+            response.addMessage(Message.createSuccessMessage("The Route was successfully removed", "Route is successfully removed"));
+        } catch (CarpoolingCustomException exception) {
+            httpStatus = HttpStatus.NOT_FOUND;
+            response.addMessage(Message.createErrorMessage(exception.getUserMessage(), "Error deleting Route"));
+        } catch (GeneralException exception) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected Error"));
+        }
+        responseEntity = new ResponseEntity<>(response, httpStatus);
+        return responseEntity;
     }
 
 }
