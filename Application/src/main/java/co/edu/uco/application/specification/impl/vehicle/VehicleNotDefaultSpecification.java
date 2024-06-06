@@ -29,6 +29,9 @@ public class VehicleNotDefaultSpecification extends CompositeSpecification<Vehic
         if (getUtilText().isEmpty(vehicle.getPlate())) {
             throw CarpoolingCustomException.buildUserException("The vehicle registration number cannot be an empty field.");
         }
+        if (getUtilText().isEmpty(vehicle.getName())) {
+            throw CarpoolingCustomException.buildUserException("The vehicle name cannot be an empty field.");
+        }
         return true;
     }
 }

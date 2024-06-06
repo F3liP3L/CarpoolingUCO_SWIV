@@ -2,7 +2,6 @@ package co.edu.uco.application.usecase.vehicle;
 
 import co.edu.uco.application.specification.impl.vehicle.ValidVehicleSpecification;
 import co.edu.uco.crosscutting.exception.GeneralException;
-import co.edu.uco.crosscutting.util.UtilUUID;
 import co.edu.uco.entity.DriverPerVehicleEntity;
 import co.edu.uco.entity.VehicleEntity;
 import co.edu.uco.port.input.bussiness.driverpervehicle.RegisterDriverPerVehicleUseCase;
