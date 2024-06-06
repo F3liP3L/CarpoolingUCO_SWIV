@@ -1,14 +1,10 @@
 package co.edu.uco.application.usecase.driverpervehicle;
 
 
-import co.edu.uco.application.dto.DriverPerVehicleDTO;
-import co.edu.uco.application.mapper.dtoassembler.DTOAssembler;
-import co.edu.uco.entity.DriverEntity;
 import co.edu.uco.port.input.bussiness.driverpervehicle.FindDriverPerVehicleUseCase;
 import co.edu.uco.entity.DriverPerVehicleEntity;
 import co.edu.uco.port.output.repository.DriverPerVehicleRepository;
 import co.edu.uco.util.exception.CarpoolingCustomException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -17,8 +13,12 @@ import java.util.UUID;
 
 @Service
 public class FindDriverPerVehicleUseCaseImpl implements FindDriverPerVehicleUseCase {
-    @Autowired
-    private DriverPerVehicleRepository driverPerVehicleRepository;
+
+    private final DriverPerVehicleRepository driverPerVehicleRepository;
+
+    public FindDriverPerVehicleUseCaseImpl(DriverPerVehicleRepository driverPerVehicleRepository) {
+        this.driverPerVehicleRepository = driverPerVehicleRepository;
+    }
 
     @Override
     public DriverPerVehicleEntity execute(UUID id) {

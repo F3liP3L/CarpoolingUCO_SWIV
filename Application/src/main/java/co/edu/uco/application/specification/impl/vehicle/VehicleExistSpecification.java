@@ -6,15 +6,19 @@ import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.entity.VehicleEntity;
 import co.edu.uco.port.output.repository.VehicleRepository;
 import co.edu.uco.util.exception.CarpoolingCustomException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
 public class VehicleExistSpecification extends CompositeSpecification<VehicleEntity> {
-    @Autowired
-    private VehicleRepository repository;
+
+    private final VehicleRepository repository;
+
+    public VehicleExistSpecification(VehicleRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
     public boolean isSatisfyBy(VehicleEntity object) {
         return isExist(object);

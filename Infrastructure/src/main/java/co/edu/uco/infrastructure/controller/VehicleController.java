@@ -59,7 +59,7 @@ public class VehicleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response<VehicleDTO>> getCustomer(@PathVariable("id") UUID id) {
+    public ResponseEntity<Response<VehicleDTO>> getVehicleById(@PathVariable("id") UUID id) {
         Response<VehicleDTO> response = new Response<>();
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());

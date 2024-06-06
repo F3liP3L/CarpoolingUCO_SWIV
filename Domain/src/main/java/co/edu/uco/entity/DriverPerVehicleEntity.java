@@ -52,4 +52,7 @@ public class DriverPerVehicleEntity {
     public static DriverPerVehicleEntity build(final UUID id) {
         return new DriverPerVehicleEntity(id, VehicleEntity.build(), EMPTY);
     }
+    public static DriverPerVehicleEntity build(final VehicleEntity vehicle, final String status) {
+        return new DriverPerVehicleEntity(UtilUUID.getUtilUUID().getNewUUID(), vehicle, status);
+    }
 }

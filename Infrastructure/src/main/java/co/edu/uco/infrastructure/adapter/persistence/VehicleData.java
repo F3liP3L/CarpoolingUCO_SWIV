@@ -17,6 +17,8 @@ public class VehicleData {
     @ManyToOne
     @JoinColumn(name = "driver_id")
     private DriverData owner;
+    @Column(name = "name")
+    private String name;
     @Column(name = "plate")
     private String plate;
     @Column(name = "quota")
