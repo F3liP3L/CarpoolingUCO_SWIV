@@ -1,9 +1,6 @@
 package co.edu.uco.application.usecase.driverpervehicle;
 
 
-import co.edu.uco.application.dto.DriverPerVehicleDTO;
-import co.edu.uco.application.mapper.dtoassembler.DTOAssembler;
-import co.edu.uco.entity.DriverEntity;
 import co.edu.uco.port.input.bussiness.driverpervehicle.FindDriverPerVehicleUseCase;
 import co.edu.uco.entity.DriverPerVehicleEntity;
 import co.edu.uco.port.output.repository.DriverPerVehicleRepository;

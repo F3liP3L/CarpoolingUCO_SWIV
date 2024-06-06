@@ -17,6 +17,7 @@ public class RegisterDriverPerVehicleUseCaseImpl implements RegisterDriverPerVeh
     @Override
     public void execute(DriverPerVehicleEntity domain) {
         domain.setId(getUtilUUID().getNewUUID());
+        domain.setStatus("Activo");
         driverPerVehicleRepository.save(domain);
     }
 }

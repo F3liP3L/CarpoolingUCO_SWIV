@@ -28,7 +28,9 @@ public class JpaDriverPerVehicleRepositoryAdapter implements DriverPerVehicleRep
 
     @Override
     public void save(DriverPerVehicleEntity driverPerVehicleEntity) {
-        repository.save(entityAssembler.assembleDomain(driverPerVehicleEntity, DriverPerVehicleData.class));
+        DriverPerVehicleData data = entityAssembler.assembleDomain(driverPerVehicleEntity, DriverPerVehicleData.class);
+        data.getStatus().setId(UUID.fromString("6c802e33-88d5-4c5e-bf2a-85d82b7da87e"));
+        repository.save(data);
     }
 
     @Override

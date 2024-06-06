@@ -5,12 +5,14 @@ import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.crosscutting.util.UtilUUID;
 import co.edu.uco.entity.DriverPerVehicleEntity;
 import co.edu.uco.entity.VehicleEntity;
+import co.edu.uco.port.input.bussiness.driverpervehicle.RegisterDriverPerVehicleUseCase;
 import co.edu.uco.port.input.bussiness.vehicle.RegisterVehicleUseCase;
-import co.edu.uco.port.output.repository.DriverPerVehicleRepository;
 import co.edu.uco.port.output.repository.VehicleRepository;
 import co.edu.uco.util.exception.CarpoolingCustomException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 
 
 @Service
@@ -18,23 +20,23 @@ import org.springframework.stereotype.Service;
 public class RegisterVehicleUseCaseImpl implements RegisterVehicleUseCase {
 
     private final VehicleRepository repository;
-    private final DriverPerVehicleRepository driverPerVehicleRepository;
+    private final RegisterDriverPerVehicleUseCase registerDriverPerVehicleUseCase;
     private final ValidVehicleSpecification specification;
 
-    public RegisterVehicleUseCaseImpl(VehicleRepository repository, DriverPerVehicleRepository driverPerVehicleRepository, ValidVehicleSpecification specification) {
+    public RegisterVehicleUseCaseImpl(VehicleRepository repository, RegisterDriverPerVehicleUseCase registerDriverPerVehicleUseCase, ValidVehicleSpecification specification) {
         this.repository = repository;
-        this.driverPerVehicleRepository = driverPerVehicleRepository;
+        this.registerDriverPerVehicleUseCase = registerDriverPerVehicleUseCase;
         this.specification = specification;
     }
 
     @Override
     public void execute(VehicleEntity domain) {
         try {
-            domain.setId(UtilUUID.getUtilUUID().getNewUUID());
+            domain.setId(getUtilUUID().getNewUUID());
             specification.isSatisfyBy(domain);
             DriverPerVehicleEntity driverPerVehicle = DriverPerVehicleEntity.build(domain, "Activo");
             repository.save(domain);
-            driverPerVehicleRepository.save(driverPerVehicle);
+            registerDriverPerVehicleUseCase.execute(driverPerVehicle);
         } catch (CarpoolingCustomException exception) {
             throw exception;
         } catch (GeneralException exception) {

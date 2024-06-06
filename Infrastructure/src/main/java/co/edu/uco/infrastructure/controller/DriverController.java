@@ -1,6 +1,7 @@
 package co.edu.uco.infrastructure.controller;
 
 import co.edu.uco.application.dto.DriverDTO;
+import co.edu.uco.application.facade.driver.FindDriverByLicenseUseCaseFacade;
 import co.edu.uco.application.facade.driver.FindDriverUseCaseFacade;
 import co.edu.uco.application.facade.driver.ListAllDriverUseCaseFacade;
 import co.edu.uco.application.facade.driver.RegisterDriverUseCaseFacade;
@@ -32,9 +33,11 @@ public class DriverController {
     private DeleteDriverUseCase deleteDriverUseCase;
     @Autowired
     private FindDriverUseCaseFacade findDriverUseCaseFacade;
+    @Autowired
+    private FindDriverByLicenseUseCaseFacade findDriverByLicenseUseCaseFacade;
 
     @GetMapping()
-    public ResponseEntity<Response<List<DriverDTO>>> getAllCustomer() {
+    public ResponseEntity<Response<List<DriverDTO>>> getAllDriver() {
         Response<List<DriverDTO>> response = new Response<>();
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
@@ -48,12 +51,26 @@ public class DriverController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response<DriverDTO>> getCustomer(@PathVariable("id") UUID id) {
+    public ResponseEntity<Response<DriverDTO>> getDriver(@PathVariable("id") UUID id) {
         Response<DriverDTO> response = new Response<>();
         HttpStatus httpStatus = HttpStatus.OK;
         response.setData(new ArrayList<>());
         try {
             response.addData(findDriverUseCaseFacade.execute(id));
+        } catch (GeneralException exception) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
+        }
+        return new ResponseEntity<>(response, httpStatus);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<Response<DriverDTO>> getDriverByLicense(@RequestParam String license) {
+        Response<DriverDTO> response = new Response<>();
+        HttpStatus httpStatus = HttpStatus.OK;
+        response.setData(new ArrayList<>());
+        try {
+            response.addData(findDriverByLicenseUseCaseFacade.execute(license));
         } catch (GeneralException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
