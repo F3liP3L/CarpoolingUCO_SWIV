@@ -12,12 +12,14 @@ import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 public class VehicleDTO {
     private UUID id;
     private String plate;
+    private String name;
     private int capacity;
     private DriverDTO owner;
 
-    public VehicleDTO(UUID id, String plate, int capacity, DriverDTO owner) {
+    public VehicleDTO(UUID id, String plate, String name, int capacity, DriverDTO owner) {
         setId(id);
         setPlate(plate);
+        setName(name);
         setCapacity(capacity);
         setOwner(owner);
     }
@@ -25,6 +27,7 @@ public class VehicleDTO {
     public VehicleDTO() {
         setId(getUtilUUID().getDefaultUUID(id));
         setPlate(EMPTY);
+        setName(EMPTY);
         setCapacity(ZERO);
         setOwner(DriverDTO.create());
     }
@@ -71,6 +74,10 @@ public class VehicleDTO {
     public void setOwner(DriverDTO owner) {
         this.owner = getUtilObject().getDefaultIsNull(owner,DriverDTO.create());
     }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = getUtilText().trim(name); }
 
     public VehicleDTO createPatch() {
         return new VehicleDTO(capacity);

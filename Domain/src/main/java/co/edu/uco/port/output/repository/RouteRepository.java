@@ -11,5 +11,5 @@ public interface RouteRepository {
     void save(RouteEntity route);
     List<RouteEntity> findRouteActive();
     Optional<RouteEntity> findById(UUID id);
-
+    void deleteById(UUID id);
 }

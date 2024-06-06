@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface DriverPerVehicleRepository {
 
-    DriverPerVehicleEntity findById(UUID id);
+    Optional<DriverPerVehicleEntity> findById(UUID id);
     void save(DriverPerVehicleEntity driverPerVehicleEntity);
     void deleteById(UUID id);
     List<DriverPerVehicleEntity> findAll();

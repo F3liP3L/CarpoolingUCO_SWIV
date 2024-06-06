@@ -1,6 +1,7 @@
 package co.edu.uco.application.specification.impl.vehicle;
 
 import co.edu.uco.application.specification.CompositeSpecification;
+import co.edu.uco.crosscutting.util.UtilText;
 import co.edu.uco.entity.VehicleEntity;
 import co.edu.uco.port.output.repository.DriverRepository;
 import co.edu.uco.util.constants.ConstantsCarpooling;
@@ -25,6 +26,9 @@ public class VehicleNotInvalidSpecification extends CompositeSpecification<Vehic
     }
 
     private boolean isValid(VehicleEntity vehicle) {
+        if (getUtilText().validMatch(vehicle.getName(), UtilText.ONLY_ANY_NUMBER)) {
+            throw CarpoolingCustomException.buildUserException("The name of the vehicle may not be composed of numbers only.");
+        }
         if (!getUtilText().validMatch(vehicle.getPlate(), ConstantsCarpooling.PLATE)) {
             throw CarpoolingCustomException.buildUserException("The plate entered does not comply with the appropriate characters.");
         }
