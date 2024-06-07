@@ -20,7 +20,7 @@ public class FindRouteSelectedUseCaseImpl implements FindRouteSelectedUseCase {
 
     @Override
     public RouteSelectedEntity execute(UUID param) {
-        Optional<RouteSelectedEntity> response = routeSelectedRepository.findById(param);
+        Optional<RouteSelectedEntity> response = routeSelectedRepository.findByRouteId(param);
         if (response.isEmpty()) {
             throw CarpoolingCustomException.buildUserException("Route Selected not found");
         }

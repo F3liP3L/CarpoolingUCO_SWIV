@@ -1,11 +1,13 @@
 package co.edu.uco.infrastructure.controller;
 
+import co.edu.uco.application.dto.DriverDTO;
 import co.edu.uco.application.dto.RouteSelectedDTO;
 import co.edu.uco.application.facade.routeselected.FindRouteSelectedUseCaseFacade;
 import co.edu.uco.application.facade.routeselected.SelectedRouteUseCaseFacade;
 import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.infrastructure.controller.response.Response;
 import co.edu.uco.infrastructure.controller.response.dto.Message;
+import co.edu.uco.port.input.bussiness.routeselected.CancelRouteSelectedUseCase;
 import co.edu.uco.util.exception.CarpoolingCustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,8 @@ public class RouteSelectedController {
     private FindRouteSelectedUseCaseFacade findRouteSelectedUseCaseFacade;
     @Autowired
     private SelectedRouteUseCaseFacade selectedRouteUseCase;
+    @Autowired
+    private CancelRouteSelectedUseCase cancelRouteSelectedUseCase;
 
     @PostMapping()
     public ResponseEntity<Response<RouteSelectedDTO>> register(@RequestBody RouteSelectedDTO route){
@@ -64,5 +68,24 @@ public class RouteSelectedController {
             response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
         }
         return new ResponseEntity<>(response, httpStatus);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<DriverDTO>> deleteDriver(@PathVariable UUID id) {
+        Response<DriverDTO> response = new Response<>();
+        ResponseEntity<Response<DriverDTO>> responseEntity;
+        HttpStatus httpStatus = HttpStatus.OK;
+        try {
+            cancelRouteSelectedUseCase.execute(id);
+            response.addMessage(Message.createSuccessMessage("The was successfully removed", "Route Selected successfully removed"));
+        } catch (CarpoolingCustomException exception) {
+            httpStatus = HttpStatus.NOT_FOUND;
+            response.addMessage(Message.createErrorMessage(exception.getUserMessage(), "Error deleting Route Selected"));
+        } catch (GeneralException exception) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected Error"));
+        }
+        responseEntity = new ResponseEntity<>(response, httpStatus);
+        return responseEntity;
     }
 }
