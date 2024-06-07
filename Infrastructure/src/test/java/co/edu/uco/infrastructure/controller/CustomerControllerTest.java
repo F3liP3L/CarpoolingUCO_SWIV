@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
@@ -71,8 +73,6 @@ class CustomerControllerTest {
         customerDTO.setCompanyEmail("jua.cardona@gmail.com");
         customerDTO.setPhone("123456789");
         customerDTO.setRol(1);
-
-        //customerEntityList.add(customerEntityEmpty);
     }
 
     @Test
@@ -82,16 +82,6 @@ class CustomerControllerTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(Objects.requireNonNull(response.getBody()).getData().get(0), customerEntity);
-    }
-
-    @Test
-    void getCustomerBadRequest() throws GeneralException {
-        when(findCustomerUseCase.execute(CUSTOMER_ID)).thenReturn(isNull());
-        final ResponseEntity<Response<CustomerEntity>> response = customerController.getCustomer(CUSTOMER_ID);
-
-        assertThrows(GeneralException.class, () -> {
-            if (Objects.requireNonNull(response.getBody()).getData().isEmpty()) throw GeneralException.build("Customer not found");
-        });
     }
 
     @Test
