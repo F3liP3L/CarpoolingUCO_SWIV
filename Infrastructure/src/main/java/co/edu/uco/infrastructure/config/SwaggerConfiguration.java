@@ -77,13 +77,18 @@ public class SwaggerConfiguration {
     }
 
     @Bean
+    public GroupedOpenApi routeSelectedApi() {
+        return GroupedOpenApi.builder()
+                .group("Route Selected API")
+                .pathsToMatch("/api/v1/carpooling-uco/routeselected/**")
+                .build();
+    }
+
+    @Bean
     public GroupedOpenApi authApi() {
         return GroupedOpenApi.builder()
                 .group("Auth API")
                 .pathsToMatch("/api/v1/carpooling-uco/auth/**")
                 .build();
     }
-
-
-
 }

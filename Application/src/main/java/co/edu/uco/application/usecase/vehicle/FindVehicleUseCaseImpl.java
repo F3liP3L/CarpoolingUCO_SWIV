@@ -20,7 +20,7 @@ public class FindVehicleUseCaseImpl implements FindVehicleUseCase {
 
     @Override
     public VehicleEntity execute(UUID param) {
-        Optional<VehicleEntity> response = repository.findById(param);
+        Optional<VehicleEntity> response = repository.findByDriverId(param);
         if (response.isEmpty()) {
             throw CarpoolingCustomException.buildUserException("The vehicle does not exist.");
         }
