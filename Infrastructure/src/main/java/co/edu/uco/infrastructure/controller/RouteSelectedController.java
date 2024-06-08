@@ -3,6 +3,7 @@ package co.edu.uco.infrastructure.controller;
 import co.edu.uco.application.dto.DriverDTO;
 import co.edu.uco.application.dto.RouteSelectedDTO;
 import co.edu.uco.application.facade.routeselected.FindRouteSelectedUseCaseFacade;
+import co.edu.uco.application.facade.routeselected.ListRouteSelectedUseCaseFacade;
 import co.edu.uco.application.facade.routeselected.SelectedRouteUseCaseFacade;
 import co.edu.uco.crosscutting.exception.GeneralException;
 import co.edu.uco.infrastructure.controller.response.Response;
@@ -14,9 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 
@@ -30,9 +29,11 @@ public class RouteSelectedController {
     private SelectedRouteUseCaseFacade selectedRouteUseCase;
     @Autowired
     private CancelRouteSelectedUseCase cancelRouteSelectedUseCase;
+    @Autowired
+    private ListRouteSelectedUseCaseFacade listRouteSelectedUseCaseFacade;
 
     @PostMapping()
-    public ResponseEntity<Response<RouteSelectedDTO>> register(@RequestBody RouteSelectedDTO route){
+    public ResponseEntity<Response<RouteSelectedDTO>> registerRoute(@RequestBody RouteSelectedDTO route){
         Response<RouteSelectedDTO> response = new Response<>();
         ResponseEntity<Response<RouteSelectedDTO>> responseEntity;
         HttpStatus httpStatus = HttpStatus.CREATED;
@@ -70,8 +71,22 @@ public class RouteSelectedController {
         return new ResponseEntity<>(response, httpStatus);
     }
 
+    @GetMapping("selected/{id}")
+    public ResponseEntity<Response<List<RouteSelectedDTO>>> getRouteSelectedById(@PathVariable("id") UUID id) {
+        Response<List<RouteSelectedDTO>> response = new Response<>();
+        HttpStatus httpStatus = HttpStatus.OK;
+        response.setData(new ArrayList<>());
+        try {
+            response.addData(listRouteSelectedUseCaseFacade.execute(Optional.empty()));
+        } catch (GeneralException exception) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            response.addMessage(Message.createFatalMessage(exception.getUserMessage(), "The Unexpected error"));
+        }
+        return new ResponseEntity<>(response, httpStatus);
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response<DriverDTO>> deleteDriver(@PathVariable UUID id) {
+    public ResponseEntity<Response<DriverDTO>> cancelRouteSelected(@PathVariable UUID id) {
         Response<DriverDTO> response = new Response<>();
         ResponseEntity<Response<DriverDTO>> responseEntity;
         HttpStatus httpStatus = HttpStatus.OK;

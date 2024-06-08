@@ -1,6 +1,5 @@
 package co.edu.uco.application.usecase.routeselected;
 
-import co.edu.uco.application.dto.requestroute.RouteIdVO;
 import co.edu.uco.entity.RouteSelectedEntity;
 import co.edu.uco.port.input.bussiness.routeselected.ListRouteSelectedUseCase;
 import co.edu.uco.port.output.repository.RouteSelectedRepository;
@@ -20,6 +19,6 @@ public class ListRouteSelectedUseCaseImpl implements ListRouteSelectedUseCase {
 
     @Override
     public List<RouteSelectedEntity> execute(Optional<RouteSelectedEntity> param) {
-        return List.of();
+        return routeSelectedRepository.findAllRouteById(param.get().getRoute().getId());
     }
 }

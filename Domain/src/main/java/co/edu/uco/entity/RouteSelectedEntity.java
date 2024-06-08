@@ -48,4 +48,12 @@ public class RouteSelectedEntity {
     public void setCustomer(CustomerEntity customer) {
         this.customer = getUtilObject().getDefaultIsNull(customer, CustomerEntity.build());
     }
+
+    public static RouteSelectedEntity build() {
+        return new RouteSelectedEntity();
+    }
+
+    public static RouteSelectedEntity build(UUID id) {
+        return new RouteSelectedEntity(id, RouteEntity.build(), CustomerEntity.build());
+    }
 }
