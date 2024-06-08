@@ -47,4 +47,9 @@ public class JpaDriverPerVehicleRepositoryAdapter implements DriverPerVehicleRep
     public Optional<DriverPerVehicleEntity> findDriverPerVehicleEntityById(UUID id) {
         return repository.findDriverPerVehicleDataById(id).map(data -> entityAssembler.assembleDomain(data, DriverPerVehicleEntity.class));
     }
+
+    @Override
+    public Optional<DriverPerVehicleEntity> findByVehicleOwnerId(UUID id) {
+        return repository.findByVehicleOwnerId(id).map(data -> entityAssembler.assembleDomain(data, DriverPerVehicleEntity.class));
+    }
 }
