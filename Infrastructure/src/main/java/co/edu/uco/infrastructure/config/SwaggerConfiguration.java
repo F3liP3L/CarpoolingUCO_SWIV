@@ -61,6 +61,14 @@ public class SwaggerConfiguration {
     }
 
     @Bean
+    public GroupedOpenApi publicDriverPerVehicleApi() {
+        return GroupedOpenApi.builder()
+                .group("Driver Per Vehicle API")
+                .pathsToMatch("/api/v1/carpooling-uco/driverpervehicle/**")
+                .build();
+    }
+
+    @Bean
     public GroupedOpenApi publicVehicleApi() {
         return GroupedOpenApi.builder()
                 .group("Vehicle API")
@@ -77,13 +85,18 @@ public class SwaggerConfiguration {
     }
 
     @Bean
+    public GroupedOpenApi routeSelectedApi() {
+        return GroupedOpenApi.builder()
+                .group("Route Selected API")
+                .pathsToMatch("/api/v1/carpooling-uco/routeselected/**")
+                .build();
+    }
+
+    @Bean
     public GroupedOpenApi authApi() {
         return GroupedOpenApi.builder()
                 .group("Auth API")
                 .pathsToMatch("/api/v1/carpooling-uco/auth/**")
                 .build();
     }
-
-
-
 }

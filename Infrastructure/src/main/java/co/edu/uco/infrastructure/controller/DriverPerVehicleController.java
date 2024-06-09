@@ -22,7 +22,7 @@ import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 
 
 @RestController
-@RequestMapping("api/v1/carpooling/driverpervehicle")
+@RequestMapping("api/v1/carpooling-uco/driverpervehicle")
 @Slf4j
 public class DriverPerVehicleController {
     @Autowired

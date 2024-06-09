@@ -14,6 +14,8 @@ public interface VehicleRepository {
 
     Optional<VehicleEntity> findByPlate(String plate);
 
+    Optional<VehicleEntity> findByDriverId(UUID driverId);
+
     void deleteById(UUID id);
 
     void save(VehicleEntity entity);

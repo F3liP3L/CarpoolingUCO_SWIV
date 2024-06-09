@@ -22,7 +22,7 @@ public class FindDriverPerVehicleUseCaseImpl implements FindDriverPerVehicleUseC
 
     @Override
     public DriverPerVehicleEntity execute(UUID id) {
-        Optional<DriverPerVehicleEntity> response = driverPerVehicleRepository.findDriverPerVehicleEntityById(id);
+        Optional<DriverPerVehicleEntity> response = driverPerVehicleRepository.findByVehicleOwnerId(id);
         if (response.isEmpty()) {
             throw CarpoolingCustomException.buildUserException("The driver per vehicle with the sent id does not exist");
         }

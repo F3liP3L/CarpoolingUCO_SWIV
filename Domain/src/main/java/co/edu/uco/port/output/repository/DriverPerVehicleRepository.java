@@ -13,4 +13,5 @@ public interface DriverPerVehicleRepository {
     void deleteById(UUID id);
     List<DriverPerVehicleEntity> findAll();
     Optional<DriverPerVehicleEntity> findDriverPerVehicleEntityById(UUID id);
+    Optional<DriverPerVehicleEntity> findByVehicleOwnerId(UUID id);
 }

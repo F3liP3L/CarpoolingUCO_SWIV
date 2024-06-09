@@ -1,7 +1,6 @@
 package co.edu.uco.application.facade.route.impl;
 
 import co.edu.uco.application.dto.requestroute.RouteAvailableDTO;
-import co.edu.uco.application.facade.route.FindRouteUseCaseFacade;
 import co.edu.uco.application.facade.route.ListRouteActiveUseCaseFacade;
 import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
 import co.edu.uco.entity.RouteEntity;

@@ -44,9 +44,8 @@ public class JpaRouteRepositoryAdapter implements RouteRepository {
     @Override
     public List<RouteEntity> findRouteActive() {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime tenMinutesAgo = now.minusMinutes(10);
-
-        List<RouteData> routes = repository.findByRouteTimeIsAfter(tenMinutesAgo);
+        List<RouteData> routes = repository.findAll().stream()
+                .filter(route -> route.getRouteTime().plusMinutes(20).isAfter(now)).toList();
         return routes.stream().map(route -> {
             RouteEntity routeAvailable = entityAssembler.assembleEntity(route, RouteEntity.class);
             routeAvailable.setOrigin(mapperJson.execute(route.getOrigin(), PositionEntity.class).get());

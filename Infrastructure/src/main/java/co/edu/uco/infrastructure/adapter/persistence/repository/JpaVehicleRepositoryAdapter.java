@@ -37,6 +37,11 @@ public class JpaVehicleRepositoryAdapter implements VehicleRepository {
     }
 
     @Override
+    public Optional<VehicleEntity> findByDriverId(UUID driverId) {
+        return Optional.ofNullable(entityAssembler.assembleEntity(repository.findByOwnerId(driverId), VehicleEntity.class));
+    }
+
+    @Override
     public void deleteById(UUID id) { repository.deleteById(id); }
 
     @Override
