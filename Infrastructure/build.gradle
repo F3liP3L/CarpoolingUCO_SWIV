@@ -28,4 +28,5 @@ dependencies {
 
     implementation project(':Application')
     implementation project(':Domain')
+    implementation project(':Utils')
 }

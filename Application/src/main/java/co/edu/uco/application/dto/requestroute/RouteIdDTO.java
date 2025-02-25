@@ -2,7 +2,7 @@ package co.edu.uco.application.dto.requestroute;
 
 import java.util.UUID;
 
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class RouteIdDTO {
     private UUID id;
@@ -11,7 +11,7 @@ public class RouteIdDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public static RouteIdDTO build() {

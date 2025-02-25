@@ -1,13 +1,13 @@
 package co.edu.uco.entity;
 
+import co.edu.uco.crosscutting.util.UtilNumeric;
+import co.edu.uco.crosscutting.util.UtilObject;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
-import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 /**
  * @author Juan Felipe Cardona;
@@ -22,7 +22,7 @@ public class RouteRequestEntity {
     private int routeCapacity;
 
     public RouteRequestEntity() {
-        setId(getUtilUUID().getDefaultUUID(getUtilUUID().getDefaultUUID(id)));
+        setId(getDefaultUUID(getDefaultUUID(id)));
         setDriverVehicle(RouteRequestDriverVehicleEntity.build());
         setOrigin(PositionEntity.build());
         setDestination(PositionEntity.build());
@@ -41,13 +41,13 @@ public class RouteRequestEntity {
         return id;
     }
     public void setId(UUID id) {
-        this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
+        this.id = UtilUUID.getDefaultUUID(id);
     }
     public RouteRequestDriverVehicleEntity getDriverVehicle() {
         return driverVehicle;
     }
     public void setDriverVehicle(RouteRequestDriverVehicleEntity driverVehicle) {
-        this.driverVehicle = getUtilObject().getDefaultIsNull(driverVehicle, RouteRequestDriverVehicleEntity.build());
+        this.driverVehicle = UtilObject.getDefaultIsNull(driverVehicle, RouteRequestDriverVehicleEntity.build());
     }
 
     public PositionEntity getOrigin() {
@@ -55,7 +55,7 @@ public class RouteRequestEntity {
     }
 
     public void setOrigin(PositionEntity origin) {
-        this.origin = getUtilObject().getDefaultIsNull(origin, PositionEntity.build());
+        this.origin = UtilObject.getDefaultIsNull(origin, PositionEntity.build());
     }
 
     public PositionEntity getDestination() {
@@ -63,12 +63,12 @@ public class RouteRequestEntity {
     }
 
     public void setDestination(PositionEntity destination) {
-        this.destination = getUtilObject().getDefaultIsNull(destination, PositionEntity.build());
+        this.destination = UtilObject.getDefaultIsNull(destination, PositionEntity.build());
     }
     public int getRouteCapacity() {
         return routeCapacity;
     }
     public void setRouteCapacity(int routeCapacity) {
-        this.routeCapacity = (int) getUtilNumeric().getDefault(routeCapacity);
+        this.routeCapacity = (int) UtilNumeric.getDefault(routeCapacity);
     }
 }

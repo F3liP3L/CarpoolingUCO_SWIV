@@ -1,13 +1,15 @@
 package co.edu.uco.application.dto;
 
+import co.edu.uco.crosscutting.util.UtilUUID;
+
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
-import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
+import static co.edu.uco.crosscutting.util.UtilNumeric.getDefault;
+import static co.edu.uco.crosscutting.util.UtilObject.getDefaultIsNull;
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilText.trim;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class VehicleDTO {
     private UUID id;
@@ -25,7 +27,7 @@ public class VehicleDTO {
     }
 
     public VehicleDTO() {
-        setId(getUtilUUID().getDefaultUUID(id));
+        setId(UtilUUID.getNewUUID());
         setPlate(EMPTY);
         setName(EMPTY);
         setCapacity(ZERO);
@@ -48,7 +50,7 @@ public class VehicleDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public String getPlate() {
@@ -56,7 +58,7 @@ public class VehicleDTO {
     }
 
     public void setPlate(String plate) {
-        this.plate = getUtilText().trim(plate).toUpperCase();
+        this.plate = trim(plate).toUpperCase();
     }
 
     public int getCapacity() {
@@ -64,7 +66,7 @@ public class VehicleDTO {
     }
 
     public void setCapacity(int capacity) {
-        this.capacity = (int) getUtilNumeric().getDefault(capacity);
+        this.capacity = (int) getDefault(capacity);
     }
 
     public DriverDTO getOwner() {
@@ -72,12 +74,12 @@ public class VehicleDTO {
     }
 
     public void setOwner(DriverDTO owner) {
-        this.owner = getUtilObject().getDefaultIsNull(owner,DriverDTO.create());
+        this.owner = getDefaultIsNull(owner,DriverDTO.create());
     }
 
     public String getName() { return name; }
 
-    public void setName(String name) { this.name = getUtilText().trim(name); }
+    public void setName(String name) { this.name = trim(name); }
 
     public VehicleDTO createPatch() {
         return new VehicleDTO(capacity);

@@ -1,11 +1,12 @@
 package co.edu.uco.application.dto;
 
 import co.edu.uco.crosscutting.util.UtilText;
+import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilText.trim;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class AuthorizedCategoryDTO {
     private UUID id;
@@ -16,7 +17,7 @@ public class AuthorizedCategoryDTO {
     }
 
     public AuthorizedCategoryDTO() {
-        setId(getUtilUUID().DEFAULT_UUID);
+        setId(UtilUUID.getNewUUID());
         setCategory(UtilText.EMPTY);
     }
 
@@ -38,7 +39,7 @@ public class AuthorizedCategoryDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public String getCategory() {
@@ -46,7 +47,7 @@ public class AuthorizedCategoryDTO {
     }
 
     public void setCategory(String category) {
-        this.category = getUtilText().trim(category);
+        this.category = trim(category);
     }
 
 }

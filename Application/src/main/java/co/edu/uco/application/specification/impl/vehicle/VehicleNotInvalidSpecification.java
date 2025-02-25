@@ -9,8 +9,8 @@ import co.edu.uco.util.exception.CarpoolingCustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
+import static co.edu.uco.crosscutting.util.UtilNumeric.isBetween;
+import static co.edu.uco.crosscutting.util.UtilText.validMatch;
 
 @Component
 public class VehicleNotInvalidSpecification extends CompositeSpecification<VehicleEntity> {
@@ -26,13 +26,13 @@ public class VehicleNotInvalidSpecification extends CompositeSpecification<Vehic
     }
 
     private boolean isValid(VehicleEntity vehicle) {
-        if (getUtilText().validMatch(vehicle.getName(), UtilText.ONLY_ANY_NUMBER)) {
+        if (validMatch(vehicle.getName(), UtilText.ONLY_ANY_NUMBER)) {
             throw CarpoolingCustomException.buildUserException("The name of the vehicle may not be composed of numbers only.");
         }
-        if (!getUtilText().validMatch(vehicle.getPlate(), ConstantsCarpooling.PLATE)) {
+        if (!validMatch(vehicle.getPlate(), ConstantsCarpooling.PLATE)) {
             throw CarpoolingCustomException.buildUserException("The plate entered does not comply with the appropriate characters.");
         }
-        if (!getUtilNumeric().isBetween(vehicle.getCapacity(), CAPACITY_MIN, CAPACITY_MAX, true, true)) {
+        if (!isBetween(vehicle.getCapacity(), CAPACITY_MIN, CAPACITY_MAX, true, true)) {
             throw CarpoolingCustomException.buildUserException("The capacity of your vehicle exceeds the maximum amount allowed.");
         }
         if (driverRepository.findById(vehicle.getOwner().getId()).isEmpty()) {

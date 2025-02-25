@@ -1,10 +1,12 @@
 package co.edu.uco.application.dto.requestroute;
 
+import co.edu.uco.crosscutting.util.UtilUUID;
+
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilText.trim;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class RouteRequestDriverVehicleDTO {
     private UUID id;
@@ -14,7 +16,7 @@ public class RouteRequestDriverVehicleDTO {
         return id;
     }
     public RouteRequestDriverVehicleDTO() {
-        setId(getUtilUUID().getDefaultUUID(id));
+        setId(UtilUUID.getNewUUID());
         setName(EMPTY);
         setNameVehicle(EMPTY);
     }
@@ -25,14 +27,14 @@ public class RouteRequestDriverVehicleDTO {
         setNameVehicle(nameVehicle);
     }
 
-    public void setId(UUID id) { this.id = getUtilUUID().getDefaultUUID(id); }
+    public void setId(UUID id) { this.id = getDefaultUUID(id); }
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = getUtilText().trim(name);
+        this.name = trim(name);
     }
 
     public String getNameVehicle() {
@@ -40,7 +42,7 @@ public class RouteRequestDriverVehicleDTO {
     }
 
     public void setNameVehicle(String nameVehicle) {
-        this.nameVehicle = getUtilText().trim(nameVehicle);
+        this.nameVehicle = trim(nameVehicle);
     }
 
     public static RouteRequestDriverVehicleDTO create() {

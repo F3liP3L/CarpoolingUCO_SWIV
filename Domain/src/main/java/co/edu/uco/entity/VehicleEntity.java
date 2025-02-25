@@ -1,15 +1,14 @@
 package co.edu.uco.entity;
 
+import co.edu.uco.crosscutting.util.UtilNumeric;
+import co.edu.uco.crosscutting.util.UtilObject;
+import co.edu.uco.crosscutting.util.UtilText;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
-import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 
 public class VehicleEntity {
     private UUID id;
@@ -28,7 +27,7 @@ public class VehicleEntity {
 
     public VehicleEntity() {
         super();
-        setId(getUtilUUID().getNewUUID());
+        setId(UtilUUID.getNewUUID());
         setPlate(EMPTY);
         setName(EMPTY);
         setCapacity(ZERO);
@@ -59,19 +58,19 @@ public class VehicleEntity {
     }
 
     public void setId(UUID id) {
-        this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
+        this.id = UtilUUID.getDefaultUUID(id);
     }
 
     public void setPlate(String plate) {
-        this.plate = getUtilText().trim(plate).toUpperCase();
+        this.plate = UtilText.trim(plate).toUpperCase();
     }
 
     public void setCapacity(int capacity) {
-        this.capacity = (int) getUtilNumeric().getDefault(capacity);
+        this.capacity = (int) UtilNumeric.getDefault(capacity);
     }
 
     public void setOwner(DriverEntity owner) {
-        this.owner = getUtilObject().getDefaultIsNull(owner, DriverEntity.createNewDriver());
+        this.owner = UtilObject.getDefaultIsNull(owner, DriverEntity.createNewDriver());
     }
 
     public String getName() {
@@ -79,7 +78,7 @@ public class VehicleEntity {
     }
 
     public void setName(String name) {
-        this.name = getUtilText().trim(name);
+        this.name = UtilText.trim(name);
     }
 
     public VehicleEntity buildPatch() {

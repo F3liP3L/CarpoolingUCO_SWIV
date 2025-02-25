@@ -1,12 +1,14 @@
 package co.edu.uco.application.dto;
 
+import co.edu.uco.crosscutting.util.UtilUUID;
+
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
-import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
+import static co.edu.uco.crosscutting.util.UtilNumeric.getDefault;
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilText.trim;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class CustomerDTO {
     private UUID id;
@@ -35,7 +37,7 @@ public class CustomerDTO {
     }
 
     public CustomerDTO() {
-        setId(getUtilUUID().getDefaultUUID(id));
+        setId(UtilUUID.getNewUUID());
         setDni(EMPTY);
         setFirstName(EMPTY);
         setSecondName(EMPTY);
@@ -57,43 +59,43 @@ public class CustomerDTO {
         return new CustomerDTO();
     }
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public void setDni(String dni) {
-        this.dni = getUtilText().trim(dni);
+        this.dni = trim(dni);
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = getUtilText().trim(firstName);
+        this.firstName = trim(firstName);
     }
 
     public void setSecondName(String secondName) {
-        this.secondName = getUtilText().trim(secondName);
+        this.secondName = trim(secondName);
     }
 
     public void setFirstSurname(String firstSurname) {
-        this.firstSurname = getUtilText().trim(firstSurname);
+        this.firstSurname = trim(firstSurname);
     }
 
     public void setSecondSurname(String secondSurname) {
-        this.secondSurname = getUtilText().trim(secondSurname);
+        this.secondSurname = trim(secondSurname);
     }
 
     public void setPhone(String phone) {
-        this.phone = getUtilText().trim(phone);
+        this.phone = trim(phone);
     }
 
     public void setCompanyEmail(String companyEmail) {
-        this.companyEmail = getUtilText().trim(companyEmail);
+        this.companyEmail = trim(companyEmail);
     }
 
     public void setPassword(String password) {
-        this.password = getUtilText().trim(password);
+        this.password = trim(password);
     }
 
     public void setRol(int rol) {
-        this.rol = (int) getUtilNumeric().getDefault(rol);
+        this.rol = (int) getDefault(rol);
     }
 
     public UUID getId() {

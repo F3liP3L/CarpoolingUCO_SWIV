@@ -19,13 +19,13 @@ public class PositionEntity {
         return longitude;
     }
     public void setLongitude(String longitude) {
-        this.longitude = UtilText.getUtilText().trim(longitude);
+        this.longitude = UtilText.trim(longitude);
     }
     public String getLatitude() {
         return latitude;
     }
     public void setLatitude(String latitude) {
-        this.latitude = UtilText.getUtilText().trim(latitude);
+        this.latitude = UtilText.trim(latitude);
     }
 
     public static PositionEntity build(){

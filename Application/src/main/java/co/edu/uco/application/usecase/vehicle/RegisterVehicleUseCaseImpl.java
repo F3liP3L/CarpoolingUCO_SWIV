@@ -11,8 +11,7 @@ import co.edu.uco.util.exception.CarpoolingCustomException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
-
+import static co.edu.uco.crosscutting.util.UtilUUID.getNewUUID;
 
 @Service
 @Transactional
@@ -31,7 +30,7 @@ public class RegisterVehicleUseCaseImpl implements RegisterVehicleUseCase {
     @Override
     public void execute(VehicleEntity domain) {
         try {
-            domain.setId(getUtilUUID().getNewUUID());
+            domain.setId(getNewUUID());
             specification.isSatisfyBy(domain);
             DriverPerVehicleEntity driverPerVehicle = DriverPerVehicleEntity.build(domain, "Activo");
             repository.save(domain);

@@ -1,6 +1,7 @@
 package co.edu.uco.application.dto;
 
 import co.edu.uco.crosscutting.util.UtilText;
+import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,12 +9,12 @@ import java.util.List;
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilDate.TIME;
-import static co.edu.uco.crosscutting.util.UtilDate.getUtilDate;
+import static co.edu.uco.crosscutting.util.UtilDate.getDefaultTimeIfNull;
 import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
-import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilNumeric.getDefault;
+import static co.edu.uco.crosscutting.util.UtilObject.getDefaultIsNull;
+import static co.edu.uco.crosscutting.util.UtilText.trim;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class RouteDTO {
     private UUID id;
@@ -37,7 +38,7 @@ public class RouteDTO {
     }
 
     public RouteDTO() {
-        setId(getUtilUUID().getDefaultUUID(getUtilUUID().getDefaultUUID(id)));
+        setId(UtilUUID.getNewUUID());
         setDriverVehicle(DriverPerVehicleDTO.build());
         setRouteCapacity(ZERO);
         setPointOfInterest(List.of(UtilText.EMPTY));
@@ -51,7 +52,7 @@ public class RouteDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public DriverPerVehicleDTO getDriverVehicle() {
@@ -59,7 +60,7 @@ public class RouteDTO {
     }
 
     public void setDriverVehicle(DriverPerVehicleDTO driverVehicle) {
-        this.driverVehicle = getUtilObject().getDefaultIsNull(driverVehicle, DriverPerVehicleDTO.build());
+        this.driverVehicle = getDefaultIsNull(driverVehicle, DriverPerVehicleDTO.build());
     }
 
     public int getRouteCapacity() {
@@ -67,7 +68,7 @@ public class RouteDTO {
     }
 
     public void setRouteCapacity(int routeCapacity) {
-        this.routeCapacity = (int) getUtilNumeric().getDefault(routeCapacity);
+        this.routeCapacity = (int) getDefault(routeCapacity);
     }
 
     public LocalDateTime getRouteTime() {
@@ -75,26 +76,26 @@ public class RouteDTO {
     }
 
     public void setRouteTime(LocalDateTime routeTime) {
-        this.routeTime = getUtilDate().getDefaultTimeIfNull(routeTime);
+        this.routeTime = getDefaultTimeIfNull(routeTime);
     }
     public List<String> getPointOfInterest() {
         return pointOfInterest;
     }
 
     public void setPointOfInterest(List<String> pointOfInterest) {
-        this.pointOfInterest = getUtilObject().getDefaultIsNull(pointOfInterest,List.of(UtilText.EMPTY));
+        this.pointOfInterest = getDefaultIsNull(pointOfInterest,List.of(UtilText.EMPTY));
     }
     public List<PositionDTO> getPositions() {
         return positions;
     }
     public void setPositions(List<PositionDTO> positions) {
-        this.positions = getUtilObject().getDefaultIsNull(positions, new ArrayList<>());
+        this.positions = getDefaultIsNull(positions, new ArrayList<>());
     }
     public String getStatus() {
         return status;
     }
     public void setStatus(String status) {
-        this.status = getUtilText().trim(status);
+        this.status = trim(status);
     }
 
     public static RouteDTO build() {

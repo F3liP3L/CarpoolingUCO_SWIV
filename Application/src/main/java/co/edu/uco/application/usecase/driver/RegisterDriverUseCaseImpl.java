@@ -11,7 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilUUID.getNewUUID;
 
 @Service
 @Transactional
@@ -26,9 +26,9 @@ public class RegisterDriverUseCaseImpl implements RegisterDriverUseCase {
 
     @Override
     public void execute(DriverEntity domain) {
-        domain.setId(getUtilUUID().getNewUUID());
+        domain.setId(getNewUUID());
         CustomerEntity customer = domain.getCustomer();
-        customer.setId(getUtilUUID().getNewUUID());
+        customer.setId(getNewUUID());
         domain.setCustomer(customer);
         validDriverSpecification.isSatisfyBy(domain);
         registerCustomerUseCase.execute(domain.getCustomer());

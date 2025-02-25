@@ -5,7 +5,7 @@ import co.edu.uco.entity.DriverPerVehicleEntity;
 import co.edu.uco.port.output.repository.DriverPerVehicleRepository;
 import org.springframework.stereotype.Service;
 
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilUUID.getNewUUID;
 
 @Service
 public class RegisterDriverPerVehicleUseCaseImpl implements RegisterDriverPerVehicleUseCase {
@@ -18,7 +18,7 @@ public class RegisterDriverPerVehicleUseCaseImpl implements RegisterDriverPerVeh
 
     @Override
     public void execute(DriverPerVehicleEntity domain) {
-        domain.setId(getUtilUUID().getNewUUID());
+        domain.setId(getNewUUID());
         domain.setStatus("Activo");
         driverPerVehicleRepository.save(domain);
     }

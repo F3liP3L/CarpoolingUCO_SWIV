@@ -6,7 +6,6 @@ import co.edu.uco.application.facade.route.RequestRouteUseCaseFacade;
 import co.edu.uco.application.mapper.entityassembler.EntityAssembler;
 import co.edu.uco.entity.RouteRequestEntity;
 import co.edu.uco.port.input.bussiness.route.RequestRouteUseCase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -20,9 +20,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -77,7 +75,7 @@ class CustomerControllerTest {
 
     @Test
     void getCustomer() throws GeneralException {
-        when(findCustomerUseCase.execute(CUSTOMER_ID)).thenReturn(customerEntity);
+        Mockito.when(findCustomerUseCase.execute(CUSTOMER_ID)).thenReturn(customerEntity);
         final ResponseEntity<Response<CustomerEntity>> response = customerController.getCustomer(CUSTOMER_ID);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());

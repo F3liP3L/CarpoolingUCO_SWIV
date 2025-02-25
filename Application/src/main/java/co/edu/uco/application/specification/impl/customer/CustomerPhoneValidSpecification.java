@@ -1,7 +1,6 @@
 package co.edu.uco.application.specification.impl.customer;
 
 import co.edu.uco.application.specification.CompositeSpecification;
-import co.edu.uco.crosscutting.util.UtilNumeric;
 import co.edu.uco.entity.CustomerEntity;
 import co.edu.uco.port.output.repository.CustomerRepository;
 import co.edu.uco.util.exception.CarpoolingCustomException;

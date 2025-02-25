@@ -1,13 +1,12 @@
 package co.edu.uco.entity;
 
+import co.edu.uco.crosscutting.util.UtilNumeric;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
-import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
 import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
-import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
+import static co.edu.uco.crosscutting.util.UtilText.*;
 
 public class CustomerEntity {
     private UUID id;
@@ -36,7 +35,7 @@ public class CustomerEntity {
     }
 
     public CustomerEntity() {
-        setId(UtilUUID.getUtilUUID().getNewUUID());
+        setId(UtilUUID.getNewUUID());
         setFirstName(EMPTY);
         setPassword(EMPTY);
         setCompanyEmail(EMPTY);
@@ -68,7 +67,7 @@ public class CustomerEntity {
     public UUID getId() { return id; }
 
     public void setId(UUID id) {
-        this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
+        this.id = UtilUUID.getDefaultUUID(id);
     }
 
     public String getFirstName() {
@@ -76,7 +75,7 @@ public class CustomerEntity {
     }
 
     public void setFirstName(String name) {
-        this.firstName = getUtilText().getDefault(name);
+        this.firstName = getDefault(name);
     }
 
     public String getPassword() {
@@ -84,7 +83,7 @@ public class CustomerEntity {
     }
 
     public void setPassword(String password) {
-        this.password = getUtilText().getDefault(password);
+        this.password = getDefault(password);
     }
 
     public String getCompanyEmail() {
@@ -92,7 +91,7 @@ public class CustomerEntity {
     }
 
     public void setCompanyEmail(String mailEntity) {
-        this.companyEmail = getUtilText().getDefault(mailEntity);
+        this.companyEmail = getDefault(mailEntity);
     }
 
     public String getDni() {
@@ -100,7 +99,7 @@ public class CustomerEntity {
     }
 
     public void setDni(String dni) {
-        this.dni = getUtilText().getDefault(dni);
+        this.dni = getDefault(dni);
     }
 
     public String getPhone() {
@@ -108,7 +107,7 @@ public class CustomerEntity {
     }
 
     public void setPhone(String phone) {
-        this.phone = getUtilText().trim(phone);
+        this.phone = trim(phone);
     }
 
     public static CustomerEntity build() {
@@ -120,7 +119,7 @@ public class CustomerEntity {
     }
 
     public void setSecondName(String secondName) {
-        this.secondName = getUtilText().getDefault(secondName);
+        this.secondName = getDefault(secondName);
     }
 
     public String getFirstSurname() {
@@ -128,7 +127,7 @@ public class CustomerEntity {
     }
 
     public void setFirstSurname(String firstSurname) {
-        this.firstSurname = getUtilText().getDefault(firstSurname);
+        this.firstSurname = getDefault(firstSurname);
     }
 
     public String getSecondSurname() {
@@ -136,7 +135,7 @@ public class CustomerEntity {
     }
 
     public void setSecondSurname(String secondSurname) {
-        this.secondSurname = getUtilText().getDefault(secondSurname);
+        this.secondSurname = getDefault(secondSurname);
     }
 
     public int getRol() {
@@ -144,6 +143,6 @@ public class CustomerEntity {
     }
 
     public void setRol(int rol) {
-        this.rol = (int) getUtilNumeric().getDefault(rol);
+        this.rol = (int) UtilNumeric.getDefault(rol);
     }
 }

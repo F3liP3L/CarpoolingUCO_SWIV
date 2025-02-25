@@ -1,10 +1,10 @@
 package co.edu.uco.entity;
 
+import co.edu.uco.crosscutting.util.UtilObject;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
 
 public class DriverPerVehicleEntity {
@@ -28,13 +28,13 @@ public class DriverPerVehicleEntity {
     }
 
     public void setId(UUID id) {
-        this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
+        this.id = UtilUUID.getDefaultUUID(id);
     }
 
     public VehicleEntity getVehicle() { return vehicle; }
 
     public void setVehicle(VehicleEntity vehicle) {
-        this.vehicle = getUtilObject().getDefaultIsNull(vehicle, VehicleEntity.build());
+        this.vehicle = UtilObject.getDefaultIsNull(vehicle, VehicleEntity.build());
     }
 
     public String getStatus() {
@@ -42,7 +42,7 @@ public class DriverPerVehicleEntity {
     }
 
     public void setStatus(String status) {
-        this.status = getUtilObject().getDefaultIsNull(status,EMPTY);
+        this.status = UtilObject.getDefaultIsNull(status,EMPTY);
     }
 
     public static DriverPerVehicleEntity build() {
@@ -53,6 +53,6 @@ public class DriverPerVehicleEntity {
         return new DriverPerVehicleEntity(id, VehicleEntity.build(), EMPTY);
     }
     public static DriverPerVehicleEntity build(final VehicleEntity vehicle, final String status) {
-        return new DriverPerVehicleEntity(UtilUUID.getUtilUUID().getNewUUID(), vehicle, status);
+        return new DriverPerVehicleEntity(UtilUUID.getNewUUID(), vehicle, status);
     }
 }

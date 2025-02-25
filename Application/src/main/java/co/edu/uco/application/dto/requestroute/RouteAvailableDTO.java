@@ -3,10 +3,13 @@ package co.edu.uco.application.dto.requestroute;
 import co.edu.uco.application.dto.DriverPerVehicleDTO;
 import co.edu.uco.application.dto.PositionDTO;
 import co.edu.uco.crosscutting.util.UtilNumeric;
-import co.edu.uco.crosscutting.util.UtilObject;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
+
+import static co.edu.uco.crosscutting.util.UtilNumeric.getDefault;
+import static co.edu.uco.crosscutting.util.UtilObject.getDefaultIsNull;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class RouteAvailableDTO {
     private UUID id;
@@ -16,7 +19,7 @@ public class RouteAvailableDTO {
     private PositionDTO destination;
 
     public RouteAvailableDTO(UUID id, DriverPerVehicleDTO driverVehicle, PositionDTO origin, PositionDTO destination, int routeCapacity) {
-        setId(UtilUUID.getUtilUUID().getDefaultUUID(id));
+        setId(getDefaultUUID(id));
         setDriverVehicle(driverVehicle);
         setRouteCapacity(routeCapacity);
         setOrigin(origin);
@@ -24,7 +27,7 @@ public class RouteAvailableDTO {
     }
 
     public RouteAvailableDTO() {
-        setId(UtilUUID.getUtilUUID().getDefaultUUID(id));
+        setId(UtilUUID.getNewUUID());
         setRouteCapacity(UtilNumeric.ZERO);
         setDriverVehicle(DriverPerVehicleDTO.build());
         setOrigin(PositionDTO.build());
@@ -36,7 +39,7 @@ public class RouteAvailableDTO {
     }
 
     public void setId(UUID id) {
-        this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public DriverPerVehicleDTO getDriverVehicle() {
@@ -44,14 +47,14 @@ public class RouteAvailableDTO {
     }
 
     public void setDriverVehicle(DriverPerVehicleDTO driverVehicle) {
-        this.driverVehicle = UtilObject.getUtilObject().getDefaultIsNull(driverVehicle, DriverPerVehicleDTO.build());
+        this.driverVehicle = getDefaultIsNull(driverVehicle, DriverPerVehicleDTO.build());
     }
     public PositionDTO getOrigin() {
         return origin;
     }
 
     public void setOrigin(PositionDTO origin) {
-        this.origin = UtilObject.getUtilObject().getDefaultIsNull(origin, PositionDTO.build());
+        this.origin = getDefaultIsNull(origin, PositionDTO.build());
     }
 
     public PositionDTO getDestination() {
@@ -59,7 +62,7 @@ public class RouteAvailableDTO {
     }
 
     public void setDestination(PositionDTO destination) {
-        this.destination = UtilObject.getUtilObject().getDefaultIsNull(destination, PositionDTO.build());
+        this.destination = getDefaultIsNull(destination, PositionDTO.build());
     }
 
     public int getRouteCapacity() {
@@ -67,7 +70,7 @@ public class RouteAvailableDTO {
     }
 
     public void setRouteCapacity(int routeCapacity) {
-        this.routeCapacity = (int) UtilNumeric.getUtilNumeric().getDefault(routeCapacity);
+        this.routeCapacity = (int) getDefault(routeCapacity);
     }
 
     public static RouteAvailableDTO build(){

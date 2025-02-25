@@ -17,7 +17,7 @@ public class RegisterCustomerUseCaseImpl implements RegisterCustomerUseCase {
 
     @Override
     public void execute(CustomerEntity entity) {
-        entity.setId(UtilUUID.getUtilUUID().getNewUUID());
+        entity.setId(UtilUUID.getNewUUID());
         validCustomerSpecification.isSatisfyBy(entity);
         portAuthentication.customerSignUp(entity);
     }

@@ -1,9 +1,11 @@
 package co.edu.uco.infrastructure.controller.response.dto;
 
-import co.edu.uco.crosscutting.util.UtilObject;
 import co.edu.uco.crosscutting.util.UtilText;
 import co.edu.uco.infrastructure.controller.response.enumeration.MessageLevel;
 import lombok.ToString;
+
+import static co.edu.uco.crosscutting.util.UtilObject.isNull;
+import static co.edu.uco.crosscutting.util.UtilText.trim;
 
 @ToString
 public class Message {
@@ -49,10 +51,10 @@ public class Message {
     }
 
     public void setText(String text) {
-        if(UtilObject.getUtilObject().isNull(text) || UtilText.EMPTY.equals(UtilText.getUtilText().trim(text))) {
+        if(isNull(text) || UtilText.EMPTY.equals(trim(text))) {
             this.text = UtilText.EMPTY;
         } else {
-            this.text = UtilText.getUtilText().trim(text);
+            this.text = trim(text);
         }
     }
 
@@ -61,10 +63,10 @@ public class Message {
     }
 
     public void setTitle(String title) {
-        if (UtilObject.getUtilObject().isNull(title) || UtilText.EMPTY.equals(UtilText.getUtilText().trim(title))) {
+        if (isNull(title) || UtilText.EMPTY.equals(trim(title))) {
             this.title = UtilText.EMPTY;
         } else {
-            this.title = UtilText.getUtilText().trim(title);
+            this.title = trim(title);
         }
     }
 
@@ -73,7 +75,7 @@ public class Message {
     }
 
     public void setLevel(MessageLevel level) {
-        if(UtilObject.getUtilObject().isNull(level)) {
+        if(isNull(level)) {
             this.level = MessageLevel.FATAL;
         } else {
             this.level = level;

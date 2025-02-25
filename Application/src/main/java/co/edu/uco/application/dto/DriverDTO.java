@@ -1,11 +1,13 @@
 package co.edu.uco.application.dto;
 
+import co.edu.uco.crosscutting.util.UtilUUID;
+
 import java.util.UUID;
 
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
+import static co.edu.uco.crosscutting.util.UtilObject.getDefaultIsNull;
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilText.trim;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class DriverDTO {
     private UUID id;
@@ -22,7 +24,7 @@ public class DriverDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public DriverDTO(UUID id, String licenseNumber, AuthorizedCategoryDTO authorizedCategory, CustomerDTO customer) {
@@ -35,7 +37,7 @@ public class DriverDTO {
 
     public DriverDTO() {
         super();
-        setId(getUtilUUID().getDefaultUUID(id));
+        setId(UtilUUID.getNewUUID());
         setLicenseNumber(EMPTY);
         setAuthorizedCategory(AuthorizedCategoryDTO.createNewAuthorizedCategory());
         setCustomer(CustomerDTO.create());
@@ -50,7 +52,7 @@ public class DriverDTO {
     }
 
     public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = getUtilText().trim(licenseNumber);
+        this.licenseNumber = trim(licenseNumber);
     }
 
     public AuthorizedCategoryDTO getAuthorizedCategory() {
@@ -58,7 +60,7 @@ public class DriverDTO {
     }
 
     public void setAuthorizedCategory(AuthorizedCategoryDTO authorizedCategory) {
-        this.authorizedCategory = getUtilObject().getDefaultIsNull(authorizedCategory,
+        this.authorizedCategory = getDefaultIsNull(authorizedCategory,
                 AuthorizedCategoryDTO.createNewAuthorizedCategory());
     }
 
@@ -67,6 +69,6 @@ public class DriverDTO {
     }
 
     public void setCustomer(CustomerDTO customer) {
-        this.customer = getUtilObject().getDefaultIsNull(customer, CustomerDTO.create());
+        this.customer = getDefaultIsNull(customer, CustomerDTO.create());
     }
 }

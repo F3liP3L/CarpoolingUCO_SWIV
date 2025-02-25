@@ -1,11 +1,13 @@
 package co.edu.uco.application.dto;
 
+import co.edu.uco.crosscutting.util.UtilUUID;
+
 import java.util.UUID;
 
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
+import static co.edu.uco.crosscutting.util.UtilObject.getDefaultIsNull;
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilText.trim;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class DriverPerVehicleDTO {
     private UUID id;
@@ -19,7 +21,7 @@ public class DriverPerVehicleDTO {
     }
 
     public DriverPerVehicleDTO() {
-        setId(getUtilUUID().getNewUUID());
+        setId(UtilUUID.getNewUUID());
         setVehicle(VehicleDTO.create());
         setStatus(EMPTY);
     }
@@ -29,7 +31,7 @@ public class DriverPerVehicleDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public VehicleDTO getVehicle() {
@@ -37,7 +39,7 @@ public class DriverPerVehicleDTO {
     }
 
     public void setVehicle(VehicleDTO vehicle) {
-        this.vehicle = getUtilObject().getDefaultIsNull(vehicle,VehicleDTO.create());
+        this.vehicle = getDefaultIsNull(vehicle,VehicleDTO.create());
     }
 
     public String getStatus() {
@@ -45,7 +47,7 @@ public class DriverPerVehicleDTO {
     }
 
     public void setStatus(String status) {
-        this.status = getUtilText().trim(status);
+        this.status = trim(status);
     }
 
     public static DriverPerVehicleDTO build() {

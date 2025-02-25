@@ -1,10 +1,11 @@
 package co.edu.uco.entity;
 
+import co.edu.uco.crosscutting.util.UtilText;
+import co.edu.uco.crosscutting.util.UtilUUID;
+
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 
 /**
  * @author Juan Felipe Cardona;
@@ -19,7 +20,7 @@ public class RouteRequestDriverVehicleEntity {
         return id;
     }
     public RouteRequestDriverVehicleEntity() {
-        setId(getUtilUUID().getDefaultUUID(id));
+        setId(UtilUUID.getDefaultUUID(id));
         setName(EMPTY);
         setNameVehicle(EMPTY);
     }
@@ -30,14 +31,14 @@ public class RouteRequestDriverVehicleEntity {
         setNameVehicle(nameVehicle);
     }
 
-    public void setId(UUID id) { this.id = getUtilUUID().getDefaultUUID(id); }
+    public void setId(UUID id) { this.id = UtilUUID.getDefaultUUID(id); }
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = getUtilText().trim(name);
+        this.name = UtilText.trim(name);
     }
 
     public String getNameVehicle() {
@@ -45,7 +46,7 @@ public class RouteRequestDriverVehicleEntity {
     }
 
     public void setNameVehicle(String nameVehicle) {
-        this.nameVehicle = getUtilText().trim(nameVehicle);
+        this.nameVehicle = UtilText.trim(nameVehicle);
     }
 
     public static RouteRequestDriverVehicleEntity build() {

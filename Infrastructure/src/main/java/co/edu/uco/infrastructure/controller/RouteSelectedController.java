@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
+import static co.edu.uco.crosscutting.util.UtilObject.isNull;
 
 @RequestMapping("api/v1/carpooling-uco/routeselected")
 @RestController
@@ -45,7 +45,7 @@ public class RouteSelectedController {
         } catch (CarpoolingCustomException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createErrorMessage(exception.getUserMessage(), "Error register a Route Selected"));
-            if (!getUtilObject().isNull(exception.getTechnicalMessage())
+            if (!isNull(exception.getTechnicalMessage())
                     && !Objects.equals(exception.getTechnicalMessage(), exception.getUserMessage())) {
                 response.addMessage(Message.createErrorMessage(exception.getTechnicalMessage(), "Technical Message"));
             }

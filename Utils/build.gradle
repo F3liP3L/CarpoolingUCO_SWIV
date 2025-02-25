@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

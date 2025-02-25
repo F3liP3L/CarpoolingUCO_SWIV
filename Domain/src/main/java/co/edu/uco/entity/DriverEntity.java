@@ -25,7 +25,7 @@ public class DriverEntity {
 
     public DriverEntity() {
         super();
-        setId(UtilUUID.getUtilUUID().DEFAULT_UUID);
+        setId(UtilUUID.getNewUUID());
         setLicenseNumber(EMPTY);
         setAuthorizedCategory(AuthorizedCategoryEntity.create());
         setCustomer(CustomerEntity.build());
@@ -36,11 +36,11 @@ public class DriverEntity {
     }
 
     public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = UtilText.getUtilText().trim(licenseNumber);
+        this.licenseNumber = UtilText.trim(licenseNumber);
     }
 
     public void setAuthorizedCategory(AuthorizedCategoryEntity authorizedCategory) {
-        this.authorizedCategory = UtilObject.getUtilObject().getDefaultIsNull(authorizedCategory,
+        this.authorizedCategory = UtilObject.getDefaultIsNull(authorizedCategory,
                 AuthorizedCategoryEntity.create());
     }
 
@@ -57,7 +57,7 @@ public class DriverEntity {
     }
 
     public void setId(UUID id) {
-        this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
+        this.id = UtilUUID.getDefaultUUID(id);
     }
 
     public CustomerEntity getCustomer() {
@@ -65,6 +65,6 @@ public class DriverEntity {
     }
 
     public void setCustomer(CustomerEntity customer) {
-        this.customer = UtilObject.getUtilObject().getDefaultIsNull(customer, CustomerEntity.build());
+        this.customer = UtilObject.getDefaultIsNull(customer, CustomerEntity.build());
     }
 }

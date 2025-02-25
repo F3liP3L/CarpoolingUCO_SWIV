@@ -1,11 +1,9 @@
 package co.edu.uco.entity;
 
+import co.edu.uco.crosscutting.util.UtilObject;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
-
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
 
 public class RouteSelectedEntity {
 
@@ -20,7 +18,7 @@ public class RouteSelectedEntity {
     }
 
     public RouteSelectedEntity() {
-        setId(UtilUUID.getUtilUUID().getNewUUID());
+        setId(UtilUUID.getNewUUID());
         setCustomer(CustomerEntity.build());
         setRoute(RouteEntity.build());
     }
@@ -30,7 +28,7 @@ public class RouteSelectedEntity {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = UtilUUID.getDefaultUUID(id);
     }
 
     public RouteEntity getRoute() {
@@ -38,7 +36,7 @@ public class RouteSelectedEntity {
     }
 
     public void setRoute(RouteEntity route) {
-        this.route = getUtilObject().getDefaultIsNull(route, RouteEntity.build());
+        this.route = UtilObject.getDefaultIsNull(route, RouteEntity.build());
     }
 
     public CustomerEntity getCustomer() {
@@ -46,7 +44,7 @@ public class RouteSelectedEntity {
     }
 
     public void setCustomer(CustomerEntity customer) {
-        this.customer = getUtilObject().getDefaultIsNull(customer, CustomerEntity.build());
+        this.customer = UtilObject.getDefaultIsNull(customer, CustomerEntity.build());
     }
 
     public static RouteSelectedEntity build() {

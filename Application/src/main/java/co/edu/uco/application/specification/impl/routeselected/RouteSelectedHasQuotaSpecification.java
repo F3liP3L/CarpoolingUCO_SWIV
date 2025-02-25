@@ -5,7 +5,7 @@ import co.edu.uco.entity.RouteSelectedEntity;
 import co.edu.uco.util.exception.CarpoolingCustomException;
 import org.springframework.stereotype.Component;
 
-import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
+import static co.edu.uco.crosscutting.util.UtilNumeric.isEqualThan;
 import static org.apache.tomcat.util.json.JSONParserConstants.ZERO;
 
 @Component
@@ -13,7 +13,7 @@ public class RouteSelectedHasQuotaSpecification extends CompositeSpecification<R
 
     @Override
     public boolean isSatisfyBy(RouteSelectedEntity object) {
-        if (getUtilNumeric().isEqualThan(object.getRoute().getRouteCapacity(), ZERO)) {
+        if (isEqualThan(object.getRoute().getRouteCapacity(), ZERO)) {
             throw CarpoolingCustomException.buildUserException("The route selected has no quota available.");
         }
         return true;

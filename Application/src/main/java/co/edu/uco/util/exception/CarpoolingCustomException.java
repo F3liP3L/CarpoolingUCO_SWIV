@@ -4,7 +4,7 @@ import co.edu.uco.util.exception.enumeration.ExceptionLocation;
 import co.edu.uco.util.exception.enumeration.ExceptionType;
 import co.edu.uco.crosscutting.exception.GeneralException;
 
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
+import static co.edu.uco.crosscutting.util.UtilObject.getDefaultIsNull;
 
 public class CarpoolingCustomException extends GeneralException {
     private ExceptionType type;
@@ -52,7 +52,7 @@ public class CarpoolingCustomException extends GeneralException {
     }
 
     public void setType(ExceptionType type) {
-        this.type = getUtilObject().getDefaultIsNull(type, ExceptionType.GENERAL);
+        this.type = getDefaultIsNull(type, ExceptionType.GENERAL);
     }
 
     public ExceptionLocation getLocation() {
@@ -60,7 +60,7 @@ public class CarpoolingCustomException extends GeneralException {
     }
 
     public void setLocation(ExceptionLocation location) {
-        this.location = getUtilObject().getDefaultIsNull(location, ExceptionLocation.GENERAL);
+        this.location = getDefaultIsNull(location, ExceptionLocation.GENERAL);
     }
 }
 

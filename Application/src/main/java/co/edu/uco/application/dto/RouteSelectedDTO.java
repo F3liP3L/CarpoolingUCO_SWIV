@@ -1,11 +1,12 @@
 package co.edu.uco.application.dto;
 
 import co.edu.uco.application.dto.requestroute.RouteIdDTO;
+import co.edu.uco.crosscutting.util.UtilUUID;
 
 import java.util.UUID;
 
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilObject.getDefaultIsNull;
+import static co.edu.uco.crosscutting.util.UtilUUID.getDefaultUUID;
 
 public class RouteSelectedDTO {
     private UUID id;
@@ -19,7 +20,7 @@ public class RouteSelectedDTO {
     }
 
     public RouteSelectedDTO() {
-        setId(getUtilUUID().getDefaultUUID(getUtilUUID().getDefaultUUID(id)));
+        setId(UtilUUID.getNewUUID());
         setRouteAvailable(RouteIdDTO.build());
         setCustomer(CustomerDTO.create());
     }
@@ -29,7 +30,7 @@ public class RouteSelectedDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public RouteIdDTO getRouteAvailable() {
@@ -37,7 +38,7 @@ public class RouteSelectedDTO {
     }
 
     public void setRouteAvailable(RouteIdDTO routeAvailable) {
-        this.routeAvailable = getUtilObject().getDefaultIsNull(routeAvailable, RouteIdDTO.build());
+        this.routeAvailable = getDefaultIsNull(routeAvailable, RouteIdDTO.build());
     }
 
     public CustomerDTO getCustomer() {
@@ -45,6 +46,6 @@ public class RouteSelectedDTO {
     }
 
     public void setCustomer(CustomerDTO customer) {
-        this.customer = getUtilObject().getDefaultIsNull(customer, CustomerDTO.create());
+        this.customer = getDefaultIsNull(customer, CustomerDTO.create());
     }
 }

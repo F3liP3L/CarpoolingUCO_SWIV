@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static co.edu.uco.crosscutting.util.UtilUUID.getUtilUUID;
+import static co.edu.uco.crosscutting.util.UtilUUID.getNewUUID;
 
 @Service
 public class RequestRouteUseCaseImpl implements RequestRouteUseCase {
@@ -36,7 +36,7 @@ public class RequestRouteUseCaseImpl implements RequestRouteUseCase {
     public RouteEntity execute(RouteRequestEntity request) {
         specification.isSatisfyBy(request);
         RouteEntity routeEntity = routeServicePort.buildRoute(request.getOrigin(), request.getDestination());
-        routeEntity.setId(getUtilUUID().getNewUUID());
+        routeEntity.setId(getNewUUID());
         routeEntity.setRouteCapacity(request.getRouteCapacity());
         routeEntity.setDestination(PositionEntity.build(request.getDestination().getLatitude(), request.getDestination().getLongitude()));
         routeEntity.setOrigin(PositionEntity.build(request.getOrigin().getLatitude(), request.getOrigin().getLongitude()));

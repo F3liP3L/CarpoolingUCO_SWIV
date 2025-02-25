@@ -1,5 +1,7 @@
 package co.edu.uco.entity;
 
+import co.edu.uco.crosscutting.util.UtilDate;
+import co.edu.uco.crosscutting.util.UtilNumeric;
 import co.edu.uco.crosscutting.util.UtilObject;
 import co.edu.uco.crosscutting.util.UtilUUID;
 
@@ -9,10 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static co.edu.uco.crosscutting.util.UtilDate.TIME;
-import static co.edu.uco.crosscutting.util.UtilDate.getUtilDate;
 import static co.edu.uco.crosscutting.util.UtilNumeric.ZERO;
-import static co.edu.uco.crosscutting.util.UtilNumeric.getUtilNumeric;
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
 
 public class RouteEntity {
     private UUID id;
@@ -38,7 +37,7 @@ public class RouteEntity {
     }
 
     public RouteEntity() {
-        setId(UtilUUID.getUtilUUID().getNewUUID());
+        setId(UtilUUID.getNewUUID());
         setRouteCapacity(ZERO);
         setPositions(new ArrayList<>());
         setPointOfInterest(new ArrayList<>());
@@ -54,7 +53,7 @@ public class RouteEntity {
     }
 
     public void setId(UUID id) {
-        this.id = UtilUUID.getUtilUUID().getDefaultUUID(id);
+        this.id = UtilUUID.getDefaultUUID(id);
     }
 
     public int getRouteCapacity() {
@@ -62,7 +61,7 @@ public class RouteEntity {
     }
 
     public final void setRouteCapacity(final int capacity) {
-        this.routeCapacity = getUtilNumeric()
+        this.routeCapacity = UtilNumeric
                 .isLessThan(capacity, ZERO) ? ZERO: capacity;
     }
 
@@ -71,7 +70,7 @@ public class RouteEntity {
     }
 
     public void setPointOfInterest(List<String> pointOfInterest) {
-        this.pointOfInterest = UtilObject.getUtilObject().getDefaultIsNull(pointOfInterest, new ArrayList<>());
+        this.pointOfInterest = UtilObject.getDefaultIsNull(pointOfInterest, new ArrayList<>());
     }
 
     public LocalDateTime getRouteTime() {
@@ -79,7 +78,7 @@ public class RouteEntity {
     }
 
     public void setRouteTime(LocalDateTime routeTime) {
-        this.routeTime = getUtilDate().getDefaultTimeIfNull(routeTime);
+        this.routeTime = UtilDate.getDefaultTimeIfNull(routeTime);
     }
 
     public DriverPerVehicleEntity getDriverVehicle() {
@@ -87,7 +86,7 @@ public class RouteEntity {
     }
 
     public void setDriverVehicle(DriverPerVehicleEntity driverVehicle) {
-        this.driverVehicle = getUtilObject().getDefaultIsNull(driverVehicle, DriverPerVehicleEntity.build());
+        this.driverVehicle = UtilObject.getDefaultIsNull(driverVehicle, DriverPerVehicleEntity.build());
     }
 
     public StatusEntity getRouteStatus() {
@@ -95,7 +94,7 @@ public class RouteEntity {
     }
 
     public void setRouteStatus(StatusEntity routeStatus) {
-        this.routeStatus = getUtilObject().getDefaultIsNull(routeStatus, StatusEntity.build());
+        this.routeStatus = UtilObject.getDefaultIsNull(routeStatus, StatusEntity.build());
     }
 
     public List<PositionEntity> getPositions() {
@@ -103,20 +102,20 @@ public class RouteEntity {
     }
 
     public void setPositions(List<PositionEntity> positions) {
-        this.positions = UtilObject.getUtilObject().getDefaultIsNull(positions, new ArrayList<>());
+        this.positions = UtilObject.getDefaultIsNull(positions, new ArrayList<>());
     }
     public PositionEntity getOrigin() {
         return origin;
     }
     public void setOrigin(PositionEntity origin) {
-        this.origin = UtilObject.getUtilObject().getDefaultIsNull(origin, PositionEntity.build());
+        this.origin = UtilObject.getDefaultIsNull(origin, PositionEntity.build());
     }
     public PositionEntity getDestination() {
         return destination;
     }
 
     public void setDestination(PositionEntity destination) {
-        this.destination = UtilObject.getUtilObject().getDefaultIsNull(destination, PositionEntity.build());
+        this.destination = UtilObject.getDefaultIsNull(destination, PositionEntity.build());
     }
 
     public static RouteEntity build() {

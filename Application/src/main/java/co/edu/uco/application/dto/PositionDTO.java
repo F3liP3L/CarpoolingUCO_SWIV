@@ -1,8 +1,7 @@
 package co.edu.uco.application.dto;
 
-import co.edu.uco.crosscutting.util.UtilText;
-
 import static co.edu.uco.crosscutting.util.UtilText.EMPTY;
+import static co.edu.uco.crosscutting.util.UtilText.trim;
 
 public class PositionDTO {
     private String latitude;
@@ -19,13 +18,13 @@ public class PositionDTO {
         return longitude;
     }
     public void setLongitude(String longitude) {
-        this.longitude = UtilText.getUtilText().trim(longitude);
+        this.longitude = trim(longitude);
     }
     public String getLatitude() {
         return latitude;
     }
     public void setLatitude(String latitude) {
-        this.latitude = UtilText.getUtilText().trim(latitude);
+        this.latitude = trim(latitude);
     }
     public static PositionDTO build(){
         return new PositionDTO();

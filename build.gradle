@@ -18,10 +18,6 @@ subprojects {
 
     apply plugin: 'java'
 
-    dependencies {
-        implementation 'com.github.F3liP3L:CrossCutting:3-task-add-utils-SNAPSHOT'
-    }
-
     tasks.named('test') {
         useJUnitPlatform()
     }

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
+import static co.edu.uco.crosscutting.util.UtilObject.isNull;
 
 @RestController
 @RequestMapping("api/v1/carpooling-uco/driver")
@@ -92,7 +92,7 @@ public class DriverController {
         } catch (CarpoolingCustomException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createErrorMessage(exception.getUserMessage(), "Error Created a Driver"));
-            if (!getUtilObject().isNull(exception.getTechnicalMessage())
+            if (!isNull(exception.getTechnicalMessage())
                     && !Objects.equals(exception.getTechnicalMessage(), exception.getUserMessage())) {
                 response.addMessage(Message.createErrorMessage(exception.getTechnicalMessage(), "Technical Message"));
             }

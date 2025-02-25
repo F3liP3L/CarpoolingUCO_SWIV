@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 import static co.edu.uco.crosscutting.util.UtilText.ONLY_CHARACTERS_AND_NUMBERS;
-import static co.edu.uco.crosscutting.util.UtilText.getUtilText;
+import static co.edu.uco.crosscutting.util.UtilText.validMatch;
 
 @Component
 public class CustomerDniValidSpecification extends CompositeSpecification<CustomerEntity> {
@@ -23,7 +23,7 @@ public class CustomerDniValidSpecification extends CompositeSpecification<Custom
         if (response.isPresent()){
             throw CarpoolingCustomException.buildUserException("Please check the dni number listed, the dni number has already been registered.");
         }
-        if (!getUtilText().validMatch(object.getDni(), ONLY_CHARACTERS_AND_NUMBERS)) {
+        if (!validMatch(object.getDni(), ONLY_CHARACTERS_AND_NUMBERS)) {
             throw CarpoolingCustomException.buildUserException("The dni number is not allowed, it must contain only numbers and letters.");
         }
         return true;

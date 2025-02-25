@@ -4,7 +4,6 @@ import co.edu.uco.infrastructure.adapter.jwt.model.UserInformationDetailsService
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -37,11 +36,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/carpooling-uco/auth/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/carpooling-uco/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/v1/carpooling-uco/customer","/api/v1/carpooling-uco/driver", "/api/v1/carpooling-uco/vehicle").permitAll()
-                        .requestMatchers(HttpMethod.GET, "api/v1/carpooling-uco/authorizedcategory/**", "/api/v1/carpooling-uco/driver/**").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(jwtAuthenticationEntryPoint))

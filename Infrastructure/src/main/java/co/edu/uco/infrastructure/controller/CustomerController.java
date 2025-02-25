@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-import static co.edu.uco.crosscutting.util.UtilObject.getUtilObject;
+import static co.edu.uco.crosscutting.util.UtilObject.isNull;
 
 /**
  * @author Juan Felipe Cardona;
@@ -80,7 +80,7 @@ public class CustomerController {
         } catch (CarpoolingCustomException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             response.addMessage(Message.createErrorMessage(exception.getUserMessage(), "Error Created a Customer"));
-            if (!getUtilObject().isNull(exception.getTechnicalMessage())
+            if (!isNull(exception.getTechnicalMessage())
                     && !Objects.equals(exception.getTechnicalMessage(), exception.getUserMessage())) {
                 response.addMessage(Message.createErrorMessage(exception.getTechnicalMessage(), "Technical Message"));
             }
